@@ -1,0 +1,63 @@
+openapi: 3.0.0
+
+info:
+  title: isyfomock API
+  description: API for Team iSYFO sin mock
+  version: 1.0.0
+servers:
+  - url: 'https://isyfomock.dev.intern.nav.no'
+paths:
+  /dialogmelding/opprett:
+    post:
+      operationId: opprettDialogmelding
+      tags:
+        - Dialogmelding
+      summary: Oppretter dialogmelding til padm2
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OpprettDialogmeldingRequest'
+      responses:
+        '200':
+          description: Ok
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal server error
+
+components:
+  schemas:
+    OpprettDialogmeldingRequest:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type dialogmelding
+          enum:
+            - VANLIG
+            - VEDLEGG,
+            - SVAR_MOTEINNKALLING
+            - SVAR_FORESPORSEL
+            - SVAR_FORESPORSEL_VEDLEGG
+        pasientFnr:
+          type: string
+          description: Fødselsnummer til pasient
+        legeFnr:
+          type: string
+          description: Fødselsnummer til lege
+          example: '01117302624'
+        notat:
+          description: Notat
+          type: string
+        refToParent:
+          description: Referanse til forrige melding i dialogen
+          type: string
+        refToConversation:
+          description: Referanse til start-meldingen i dialogen
+          type: string
+      required:
+        - type
+        - pasientFnr
+        - legeFnr

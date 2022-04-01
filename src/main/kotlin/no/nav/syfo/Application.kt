@@ -5,20 +5,25 @@ import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import no.nav.syfo.application.ApplicationState
 import no.nav.syfo.application.api.apiModule
+import no.nav.syfo.mq.MQSender
+import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.util.concurrent.TimeUnit
 
+val log: Logger = LoggerFactory.getLogger("no.nav.syfo.isyfomock")
+
 fun main() {
     val environment = Environment()
+    val mqSender = MQSender(environment)
     val applicationState = ApplicationState()
     val applicationEngineEnvironment = applicationEngineEnvironment {
-        log = LoggerFactory.getLogger("no.nav.syfo.isyfomock")
         connector {
             port = environment.applicationPort
         }
         module {
             apiModule(
-                applicationState = applicationState
+                mqSender = mqSender,
+                applicationState = applicationState,
             )
         }
     }

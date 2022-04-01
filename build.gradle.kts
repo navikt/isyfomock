@@ -10,12 +10,14 @@ object Versions {
     const val logstashEncoder = "7.0.1"
     const val micrometerRegistry = "1.8.4"
     const val spek = "2.0.18"
+    const val swaggerUi = "4.9.1"
 }
 
 plugins {
     kotlin("jvm") version "1.6.10"
     id("com.github.johnrengelman.shadow") version "7.1.2"
     id("org.jlleitschuh.gradle.ktlint") version "10.2.1"
+    id("org.hidetake.swagger.generator") version "2.19.2" apply true
 }
 
 val githubUser: String by project
@@ -44,6 +46,8 @@ dependencies {
     // (De-)serialization
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${Versions.jackson}")
 
+    swaggerUI("org.webjars:swagger-ui:${Versions.swaggerUi}")
+
     testImplementation("io.ktor:ktor-server-test-host:${Versions.ktor}")
     testImplementation("io.mockk:mockk:${Versions.mockk}")
     testImplementation("org.amshove.kluent:kluent:${Versions.kluent}")
@@ -52,6 +56,12 @@ dependencies {
     }
     testRuntimeOnly("org.spekframework.spek2:spek-runner-junit5:${Versions.spek}") {
         exclude(group = "org.jetbrains.kotlin")
+    }
+}
+
+swaggerSources {
+    create("isyfomock").apply {
+        setInputFile(file("api/oas3/isyfomock-api.yaml"))
     }
 }
 
@@ -70,10 +80,15 @@ tasks {
         kotlinOptions.jvmTarget = "17"
     }
 
+    withType<org.hidetake.gradle.swagger.generator.GenerateSwaggerUI> {
+        outputDir = File(buildDir.path + "/resources/main/api")
+    }
+
     withType<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar> {
         archiveBaseName.set("app")
         archiveClassifier.set("")
         archiveVersion.set("")
+        dependsOn("generateSwaggerUI")
     }
 
     withType<Test> {

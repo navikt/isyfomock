@@ -39,7 +39,7 @@ object PodApiSpek : Spek({
                 applicationState = ApplicationState(
                     alive = false,
                     ready = false,
-                )
+                ),
             )
 
             it("Returns internal server error when liveness check fails") {
