@@ -38,8 +38,8 @@ fun Route.registerDialogmeldingApi(dialogmeldingService: DialogmeldingService) {
 
         dialogmeldingService.opprettDialogmelding(request)
 
-        log.info("Dialogmelding opprettet")
-
-        call.respond(HttpStatusCode.OK, "Opprettet dialogmelding med msgId $msgId")
+        val message = "Dialogmelding med msgId $msgId opprettet og sendt til padm2"
+        log.info(message)
+        call.respond(HttpStatusCode.OK, message)
     }
 }
