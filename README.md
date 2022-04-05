@@ -1,6 +1,6 @@
 # isyfomock
 
-Backend for Team iSYFO sin mock
+Backend for Team iSYFO sin mock. Appen ligger i dev-gcp og APIet er dokumentert og kan brukes fra https://isyfomock.dev.intern.nav.no/api/v1/docs/
 
 ## Technologies used
 
