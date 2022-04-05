@@ -1,6 +1,7 @@
 package no.nav.syfo.dialogmelding
 
 import no.kith.xmlstds.dialog._2006_10_11.XMLDialogmelding
+import no.kith.xmlstds.msghead._2006_05_24.XMLConversationRef
 import no.kith.xmlstds.msghead._2006_05_24.XMLMsgHead
 import no.nav.syfo.dialogmelding.model.DialogmeldingType
 import no.nav.syfo.dialogmelding.model.OpprettDialogmeldingRequest
@@ -50,11 +51,23 @@ class DialogmeldingService(private val mqSender: MQSender) {
             request.pasientFnr.value
 
         request.notat?.let { xmlDialogmelding.notat[0].tekstNotatInnhold = it }
+
+        val conversationRef = xmlFellesformat.get<XMLMsgHead>().msgInfo.conversationRef
         request.refToConversation?.let {
-            xmlFellesformat.get<XMLMsgHead>().msgInfo.conversationRef.refToConversation = it
+            validateConversationRef(conversationRef)
+            conversationRef.refToConversation = it
         }
-        request.refToParent?.let { xmlFellesformat.get<XMLMsgHead>().msgInfo.conversationRef.refToParent = it }
+        request.refToParent?.let {
+            validateConversationRef(conversationRef)
+            conversationRef.refToParent = it
+        }
 
         return xmlFellesformat
+    }
+
+    private fun validateConversationRef(conversationRef: XMLConversationRef?) {
+        if (conversationRef == null) {
+            throw IllegalArgumentException("Kan ikke sette dialog-referanser for denne type dialogmelding")
+        }
     }
 }

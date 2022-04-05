@@ -302,6 +302,52 @@ class DialogmeldingApiSpek : Spek({
                         actualFellesformatXml.msgHead.msgInfo.conversationRef.refToParent shouldBeEqualTo refToParent
                     }
                 }
+                it("gir feilmelding ved opprettelse av vanlig dialogmelding med dialog-refs") {
+                    val messageSlot = slot<String>()
+                    justRun { mqSender.send(capture(messageSlot)) }
+
+                    val requestParameters = listOf(
+                        OpprettDialogmeldingRequestParameters.pasientFnr to pasientFnr,
+                        OpprettDialogmeldingRequestParameters.notat to notat,
+                        OpprettDialogmeldingRequestParameters.legeFnr to legeFnr,
+                        OpprettDialogmeldingRequestParameters.type to DialogmeldingType.VANLIG.toString(),
+                        OpprettDialogmeldingRequestParameters.refToConversation to UUID.randomUUID().toString(),
+                        OpprettDialogmeldingRequestParameters.refToParent to UUID.randomUUID().toString(),
+                    )
+
+                    with(
+                        handleRequest(HttpMethod.Post, url) {
+                            addHeader("Content-Type", ContentType.Application.FormUrlEncoded.toString())
+                            setBody(requestParameters.formUrlEncode())
+                        }
+                    ) {
+                        response.status() shouldBeEqualTo HttpStatusCode.BadRequest
+
+                        verify(exactly = 0) { mqSender.send(any()) }
+                    }
+                }
+                it("oppretter dialogmelding svar møte-innkalling med tomme verdier i frivillige parametere") {
+                    val messageSlot = slot<String>()
+                    justRun { mqSender.send(capture(messageSlot)) }
+
+                    val requestParameters = listOf(
+                        OpprettDialogmeldingRequestParameters.pasientFnr to pasientFnr,
+                        OpprettDialogmeldingRequestParameters.notat to null,
+                        OpprettDialogmeldingRequestParameters.legeFnr to legeFnr,
+                        OpprettDialogmeldingRequestParameters.type to DialogmeldingType.SVAR_MOTEINNKALLING.toString(),
+                        OpprettDialogmeldingRequestParameters.refToConversation to null,
+                        OpprettDialogmeldingRequestParameters.refToParent to null,
+                    )
+
+                    with(
+                        handleRequest(HttpMethod.Post, url) {
+                            addHeader("Content-Type", ContentType.Application.FormUrlEncoded.toString())
+                            setBody(requestParameters.formUrlEncode())
+                        }
+                    ) {
+                        response.status() shouldBeEqualTo HttpStatusCode.OK
+                    }
+                }
             }
         }
     }
