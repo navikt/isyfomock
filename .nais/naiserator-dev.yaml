@@ -32,3 +32,16 @@ spec:
       memory: 768Mi
   ingresses:
     - "https://isyfomock.dev.intern.nav.no"
+  envFrom:
+    - secret: isyfomock-serviceuser
+  env:
+    - name: MQGATEWAY_HOSTNAME
+      value: b27apvl221.preprod.local
+    - name: MQGATEWAY_PORT
+      value: '1413'
+    - name: MQGATEWAY_NAME
+      value: MQLS03
+    - name: MQGATEWAY_CHANNEL_NAME
+      value: Q1_ISYFOMOCK
+    - name: PADM2_QUEUENAME
+      value: QA.Q1_PADM.INPUT
