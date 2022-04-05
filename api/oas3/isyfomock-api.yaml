@@ -37,7 +37,7 @@ components:
           description: Type dialogmelding
           enum:
             - VANLIG
-            - VEDLEGG,
+            - VEDLEGG
             - SVAR_MOTEINNKALLING
             - SVAR_FORESPORSEL
             - SVAR_FORESPORSEL_VEDLEGG
