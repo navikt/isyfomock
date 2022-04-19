@@ -1,12 +1,13 @@
 package no.nav.syfo.application.api
 
-import io.ktor.application.*
-import io.ktor.client.features.*
-import io.ktor.features.*
+import io.ktor.server.application.*
+import io.ktor.client.plugins.*
 import io.ktor.http.*
-import io.ktor.jackson.*
-import io.ktor.response.*
-import io.ktor.routing.*
+import io.ktor.serialization.jackson.*
+import io.ktor.server.routing.*
+import io.ktor.server.plugins.contentnegotiation.*
+import io.ktor.server.plugins.statuspages.*
+import io.ktor.server.response.*
 import no.nav.syfo.application.ApplicationState
 import no.nav.syfo.application.metric.registerMetricApi
 import no.nav.syfo.configureJacksonMapper
@@ -22,8 +23,8 @@ fun Application.apiModule(
         jackson(block = configureJacksonMapper())
     }
     install(StatusPages) {
-        exception<Throwable> { cause ->
-            log.error("Caught exception", cause)
+        exception<Throwable> { call, cause ->
+            call.application.log.error("Caught exception", cause)
 
             val response: Pair<HttpStatusCode, String> = when (cause) {
                 is ResponseException -> Pair(

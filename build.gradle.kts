@@ -3,7 +3,7 @@ version = "0.0.1"
 
 object Versions {
     const val jaxb = "2.3.1"
-    const val ktor = "1.6.8"
+    const val ktor = "2.0.0"
     const val kluent = "1.68"
     const val mockk = "1.12.3"
     const val jackson = "2.13.1"
@@ -41,9 +41,10 @@ dependencies {
     implementation(kotlin("stdlib"))
     implementation(kotlin("reflect"))
 
-    implementation("io.ktor:ktor-jackson:${Versions.ktor}")
+    implementation("io.ktor:ktor-serialization-jackson:${Versions.ktor}")
     implementation("io.ktor:ktor-client-cio:${Versions.ktor}")
-    implementation("io.ktor:ktor-server-core:${Versions.ktor}")
+    implementation("io.ktor:ktor-server-content-negotiation:${Versions.ktor}")
+    implementation("io.ktor:ktor-server-status-pages:${Versions.ktor}")
     implementation("io.ktor:ktor-server-netty:${Versions.ktor}")
 
     // Logging
@@ -51,7 +52,7 @@ dependencies {
     implementation("net.logstash.logback:logstash-logback-encoder:${Versions.logstashEncoder}")
 
     // Metrics and Prometheus
-    implementation("io.ktor:ktor-metrics-micrometer:${Versions.ktor}")
+    implementation("io.ktor:ktor-server-metrics-micrometer:${Versions.ktor}")
     implementation("io.micrometer:micrometer-registry-prometheus:${Versions.micrometerRegistry}")
 
     // (De-)serialization
