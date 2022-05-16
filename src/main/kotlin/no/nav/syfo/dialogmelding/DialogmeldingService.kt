@@ -62,6 +62,8 @@ class DialogmeldingService(private val mqSender: MQSender) {
             conversationRef.refToParent = it
         }
 
+        request.partnerId?.let { xmlFellesformat.get<XMLMottakenhetBlokk>().partnerReferanse = it }
+
         return xmlFellesformat
     }
 

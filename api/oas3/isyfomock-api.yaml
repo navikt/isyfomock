@@ -57,6 +57,9 @@ components:
         refToConversation:
           description: Referanse til start-meldingen i dialogen
           type: string
+        partnerId:
+          description: PartnerId for å identifisere kontoret meldingen sendes fra
+          type: string
       required:
         - type
         - pasientFnr
