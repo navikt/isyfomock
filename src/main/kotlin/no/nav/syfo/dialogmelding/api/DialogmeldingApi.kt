@@ -20,6 +20,7 @@ object OpprettDialogmeldingRequestParameters {
     const val notat = "notat"
     const val refToParent = "refToParent"
     const val refToConversation = "refToConversation"
+    const val partnerId = "partnerId"
 }
 
 fun Route.registerDialogmeldingApi(dialogmeldingService: DialogmeldingService) {
@@ -34,6 +35,7 @@ fun Route.registerDialogmeldingApi(dialogmeldingService: DialogmeldingService) {
             notat = formParameters[OpprettDialogmeldingRequestParameters.notat],
             refToParent = formParameters[OpprettDialogmeldingRequestParameters.refToParent],
             refToConversation = formParameters[OpprettDialogmeldingRequestParameters.refToConversation],
+            partnerId = formParameters[OpprettDialogmeldingRequestParameters.partnerId],
         )
 
         dialogmeldingService.opprettDialogmelding(request)
