@@ -17,10 +17,13 @@ object OpprettDialogmeldingRequestParameters {
     const val type = "type"
     const val pasientFnr = "pasientFnr"
     const val legeFnr = "legeFnr"
+    const val hprId = "hprId"
+    const val legeHerId = "legeHerId"
     const val notat = "notat"
     const val refToParent = "refToParent"
     const val refToConversation = "refToConversation"
     const val partnerId = "partnerId"
+    const val kontorHerId = "kontorHerId"
 }
 
 fun Route.registerDialogmeldingApi(dialogmeldingService: DialogmeldingService) {
@@ -32,10 +35,13 @@ fun Route.registerDialogmeldingApi(dialogmeldingService: DialogmeldingService) {
             type = DialogmeldingType.valueOf(formParameters.getOrFail(OpprettDialogmeldingRequestParameters.type)),
             pasientFnr = PersonIdent(formParameters.getOrFail(OpprettDialogmeldingRequestParameters.pasientFnr)),
             legeFnr = PersonIdent(formParameters.getOrFail(OpprettDialogmeldingRequestParameters.legeFnr)),
+            hprId = formParameters[OpprettDialogmeldingRequestParameters.hprId],
+            legeHerId = formParameters[OpprettDialogmeldingRequestParameters.legeHerId],
             notat = formParameters[OpprettDialogmeldingRequestParameters.notat],
             refToParent = formParameters[OpprettDialogmeldingRequestParameters.refToParent],
             refToConversation = formParameters[OpprettDialogmeldingRequestParameters.refToConversation],
             partnerId = formParameters[OpprettDialogmeldingRequestParameters.partnerId],
+            kontorHerId = formParameters[OpprettDialogmeldingRequestParameters.kontorHerId],
         )
 
         dialogmeldingService.opprettDialogmelding(request)

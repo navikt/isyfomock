@@ -7,8 +7,11 @@ data class OpprettDialogmeldingRequest(
     val msgId: String,
     val pasientFnr: PersonIdent,
     val legeFnr: PersonIdent,
+    val hprId: String?,
+    val legeHerId: String?,
     val notat: String?,
     val refToParent: String?,
     val refToConversation: String?,
     val partnerId: String?,
+    val kontorHerId: String?,
 )

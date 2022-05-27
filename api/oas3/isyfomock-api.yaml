@@ -48,6 +48,12 @@ components:
           type: string
           description: Fødselsnummer til lege
           example: '01117302624'
+        hprId:
+          description: HprId for å identifisere legen som helsepersonell
+          type: string
+        legeHerId:
+          description: HerId for å identifisere legen på et kontor
+          type: string
         notat:
           description: Notat
           type: string
@@ -59,6 +65,9 @@ components:
           type: string
         partnerId:
           description: PartnerId for å identifisere kontoret meldingen sendes fra
+          type: string
+        kontorHerId:
+          description: HerId for å identifisere kontoret meldingen sendes fra
           type: string
       required:
         - type

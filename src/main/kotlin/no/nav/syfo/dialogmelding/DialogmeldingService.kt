@@ -47,6 +47,22 @@ class DialogmeldingService(private val mqSender: MQSender) {
         xmlFellesformat.get<XMLMottakenhetBlokk>().mottattDatotid =
             DatatypeFactory.newInstance().newXMLGregorianCalendar(GregorianCalendar())
         xmlFellesformat.get<XMLMottakenhetBlokk>().avsenderFnrFraDigSignatur = request.legeFnr.value
+        xmlFellesformat.get<XMLMsgHead>().msgInfo.sender.organisation.healthcareProfessional.ident
+            .find { it.typeId.v == "FNR" }?.id = request.legeFnr.value
+        request.hprId?.let {
+            xmlFellesformat.get<XMLMsgHead>().msgInfo.sender.organisation.healthcareProfessional.ident
+                .find { it.typeId.v == "HPR" }?.id = request.hprId
+        }
+        request.legeHerId?.let {
+            xmlFellesformat.get<XMLMsgHead>().msgInfo.sender.organisation.healthcareProfessional.ident
+                .find { it.typeId.v == "HER" }?.id = request.legeHerId
+        }
+
+        request.kontorHerId?.let {
+            xmlFellesformat.get<XMLMsgHead>().msgInfo.sender.organisation.ident
+                .find { it.typeId.v == "HER" }?.id = request.kontorHerId
+        }
+
         xmlFellesformat.get<XMLMsgHead>().msgInfo.patient.ident.find { it.typeId.v == "FNR" }?.id =
             request.pasientFnr.value
 
@@ -63,6 +79,7 @@ class DialogmeldingService(private val mqSender: MQSender) {
         }
 
         request.partnerId?.let { xmlFellesformat.get<XMLMottakenhetBlokk>().partnerReferanse = it }
+        request.kontorHerId?.let { xmlFellesformat.get<XMLMottakenhetBlokk>().herIdentifikator = it }
 
         return xmlFellesformat
     }
