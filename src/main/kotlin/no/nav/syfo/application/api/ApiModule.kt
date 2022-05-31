@@ -8,6 +8,8 @@ import io.ktor.server.routing.*
 import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.server.plugins.statuspages.*
 import io.ktor.server.response.*
+import no.nav.syfo.aktoer.AktoerService
+import no.nav.syfo.aktoer.registerAktoerApi
 import no.nav.syfo.application.ApplicationState
 import no.nav.syfo.application.metric.registerMetricApi
 import no.nav.syfo.configureJacksonMapper
@@ -46,11 +48,13 @@ fun Application.apiModule(
     }
 
     val dialogmeldingService = DialogmeldingService(mqSender = mqSender)
+    val aktoerService = AktoerService()
 
     routing {
         registerPodApi(applicationState = applicationState)
         registerMetricApi()
         registerSwaggerDocApi()
         registerDialogmeldingApi(dialogmeldingService = dialogmeldingService)
+        registerAktoerApi(aktoerService = aktoerService)
     }
 }
