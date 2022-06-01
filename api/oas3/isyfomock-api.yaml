@@ -27,6 +27,20 @@ paths:
         '500':
           description: Internal server error
 
+  /aktoer/hentAktoerIdBySsn/{ssn}:
+    post:
+      operationId: hentAktoerIdBySsn
+      tags:
+        - Aktoer
+      summary: Map ssn to aktoer id
+      responses:
+        '200':
+          description: Ok
+        '404':
+          description: No result for ssn
+        '500':
+          description: Internal server error
+
 components:
   schemas:
     OpprettDialogmeldingRequest:
