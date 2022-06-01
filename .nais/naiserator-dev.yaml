@@ -45,3 +45,9 @@ spec:
       value: Q1_ISYFOMOCK
     - name: PADM2_QUEUENAME
       value: QA.Q1_PADM.INPUT
+    - name: PDL_CLIENT_ID
+      value: "dev-fss.pdl.pdl-api"
+    - name: PDL_URL
+      value: "https://pdl-api.dev-fss-pub.nais.io/graphql"
+    - name: REDIS_HOST
+      value: "isyfomock-redis.teamsykefravr.svc.cluster.local"

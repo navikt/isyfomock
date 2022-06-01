@@ -5,9 +5,13 @@ import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import no.nav.syfo.application.ApplicationState
 import no.nav.syfo.application.api.apiModule
+import no.nav.syfo.application.cache.RedisStore
 import no.nav.syfo.mq.MQSender
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import redis.clients.jedis.JedisPool
+import redis.clients.jedis.JedisPoolConfig
+import redis.clients.jedis.Protocol
 import java.util.concurrent.TimeUnit
 
 val log: Logger = LoggerFactory.getLogger("no.nav.syfo.isyfomock")
@@ -15,11 +19,23 @@ val log: Logger = LoggerFactory.getLogger("no.nav.syfo.isyfomock")
 fun main() {
     val environment = Environment()
     val serviceUser = ServiceUser()
+    val applicationState = ApplicationState()
+
     val mqSender = MQSender(
         environmentMQ = environment.mq,
         serviceUser = serviceUser
     )
-    val applicationState = ApplicationState()
+
+    val cache = RedisStore(
+        JedisPool(
+            JedisPoolConfig(),
+            environment.redisHost,
+            environment.redisPort,
+            Protocol.DEFAULT_TIMEOUT,
+            environment.redisSecret
+        )
+    )
+
     val applicationEngineEnvironment = applicationEngineEnvironment {
         connector {
             port = environment.applicationPort
@@ -28,6 +44,8 @@ fun main() {
             apiModule(
                 mqSender = mqSender,
                 applicationState = applicationState,
+                cache = cache,
+                environment = environment
             )
         }
     }

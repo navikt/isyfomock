@@ -7,10 +7,24 @@ import io.ktor.server.routing.*
 
 fun Route.registerAktoerApi(aktoerService: AktoerService) {
     get("/aktoer/hentAktoerIdBySsn/{ssn}") {
-        call.respond(HttpStatusCode.OK)
+        try {
+            val ssn = call.parameters["ssn"] ?: throw IllegalArgumentException()
+            val aktoerId = aktoerService.getAktoerIdFormSsn(ssn) ?: throw IllegalArgumentException()
+
+            call.respond(aktoerId)
+        } catch (e: Exception) {
+            call.respond(HttpStatusCode.NotFound)
+        }
     }
 
-    get("/aktoer/hentFnrByAktoerId/{aktoerId}") {
-        call.respond(HttpStatusCode.OK)
+    get("/aktoer/hentSsnByAktoerId/{aktoerId}") {
+        try {
+            val aktoerId = call.parameters["aktoerId"] ?: throw IllegalArgumentException()
+            val ssn = aktoerService.getSsnFormAktoerId(aktoerId) ?: throw IllegalArgumentException()
+
+            call.respond(ssn)
+        } catch (e: Exception) {
+            call.respond(HttpStatusCode.NotFound)
+        }
     }
 }
