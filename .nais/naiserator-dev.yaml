@@ -32,6 +32,10 @@ spec:
       memory: 768Mi
   ingresses:
     - "https://isyfomock.dev.intern.nav.no"
+  accessPolicy:
+    outbound:
+      rules:
+        - application: isyfomock-redis
   azure:
     application:
       enabled: true
