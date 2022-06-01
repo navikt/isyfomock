@@ -7,14 +7,12 @@ object Versions {
     const val kluent = "1.68"
     const val mockk = "1.12.4"
     const val jackson = "2.13.3"
-    const val jedis = "4.2.2"
     const val javaTimeAdapter = "1.1.3"
     const val logback = "1.2.11"
     const val logstashEncoder = "7.2"
     const val micrometerRegistry = "1.9.0"
     const val mq = "9.2.5.0"
     const val nimbusjosejwt = "9.22"
-    const val redisEmbedded = "0.7.3"
     const val spek = "2.0.18"
     const val syfotjenester = "1.2021.06.09-13.09-b3d30de9996e"
     const val swaggerUi = "4.9.1"
@@ -66,10 +64,6 @@ dependencies {
     implementation("javax.xml.bind:jaxb-api:${Versions.jaxb}")
     implementation("org.glassfish.jaxb:jaxb-runtime:${Versions.jaxb}")
     implementation("com.migesok:jaxb-java-time-adapters:${Versions.javaTimeAdapter}")
-
-    // Cache
-    implementation("redis.clients:jedis:${Versions.jedis}")
-    testImplementation("it.ozimov:embedded-redis:${Versions.redisEmbedded}")
 
     // MQ
     implementation("com.ibm.mq:com.ibm.mq.allclient:${Versions.mq}")

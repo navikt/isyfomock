@@ -16,9 +16,6 @@ data class Environment(
     ),
     val pdlUrl: String = getEnvVar("PDL_URL"),
     val pdlClientId: String = getEnvVar("PDL_CLIENT_ID"),
-    val redisHost: String = getEnvVar("REDIS_HOST"),
-    val redisPort: Int = getEnvVar("REDIS_PORT", "6379").toInt(),
-    val redisSecret: String = getEnvVar("REDIS_PASSWORD"),
 )
 
 data class EnvironmentMQ(

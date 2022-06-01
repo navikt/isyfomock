@@ -32,16 +32,11 @@ spec:
       memory: 768Mi
   ingresses:
     - "https://isyfomock.dev.intern.nav.no"
-  accessPolicy:
-    outbound:
-      rules:
-        - application: isyfomock-redis
   azure:
     application:
       enabled: true
   envFrom:
     - secret: isyfomock-serviceuser
-    - secret: isyfomock-redis-password
   env:
     - name: MQGATEWAY_HOSTNAME
       value: b27apvl221.preprod.local
@@ -57,5 +52,3 @@ spec:
       value: "dev-fss.pdl.pdl-api"
     - name: PDL_URL
       value: "https://pdl-api.dev-fss-pub.nais.io/graphql"
-    - name: REDIS_HOST
-      value: "isyfomock-redis.teamsykefravr.svc.cluster.local"

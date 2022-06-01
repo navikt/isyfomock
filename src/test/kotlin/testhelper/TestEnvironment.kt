@@ -22,9 +22,6 @@ fun testEnvironment(
         mqChannelName = "mogateway-channel-name",
         padm2Queuename = "padm2-queuename",
     ),
-    redisHost = "localhost",
-    redisPort = 6599,
-    redisSecret = "password",
     pdlClientId = "pdlClientId",
     pdlUrl = pdlUrl ?: "http://pdl",
 )

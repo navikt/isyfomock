@@ -12,7 +12,6 @@ import no.nav.syfo.Environment
 import no.nav.syfo.aktoer.AktoerService
 import no.nav.syfo.aktoer.registerAktoerApi
 import no.nav.syfo.application.ApplicationState
-import no.nav.syfo.application.cache.RedisStore
 import no.nav.syfo.application.metric.registerMetricApi
 import no.nav.syfo.client.azuread.AzureAdV2Client
 import no.nav.syfo.client.pdl.PdlClient
@@ -24,7 +23,6 @@ import no.nav.syfo.mq.MQSender
 fun Application.apiModule(
     applicationState: ApplicationState,
     mqSender: MQSender,
-    cache: RedisStore,
     environment: Environment,
 ) {
     install(ContentNegotiation) {
@@ -57,7 +55,6 @@ fun Application.apiModule(
         aadAppClient = environment.aadAppClient,
         aadAppSecret = environment.aadAppSecret,
         aadTokenEndpoint = environment.aadTokenEndpoint,
-        redisStore = cache,
     )
 
     val pdlClient = PdlClient(
