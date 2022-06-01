@@ -37,6 +37,7 @@ spec:
       enabled: true
   envFrom:
     - secret: isyfomock-serviceuser
+    - secret: isyfomock-redis-password
   env:
     - name: MQGATEWAY_HOSTNAME
       value: b27apvl221.preprod.local
