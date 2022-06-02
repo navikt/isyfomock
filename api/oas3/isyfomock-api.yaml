@@ -28,18 +28,44 @@ paths:
           description: Internal server error
 
   /aktoer/hentAktoerIdBySsn/{ssn}:
-    post:
-      operationId: hentAktoerIdBySsn
+    get:
       tags:
-        - Aktoer
-      summary: Map ssn to aktoer id
+        - Aktør
+      summary: "Finn aktør-ID fra fødselsnummer"
+      description: ""
+      operationId: "getAktoerIdBySsn"
+      parameters:
+        - name: "ssn"
+          in: "path"
+          description: "Ssn"
+          required: true
       responses:
-        '200':
-          description: Ok
-        '404':
-          description: No result for ssn
-        '500':
-          description: Internal server error
+        "200":
+          description: "successful operation"
+        "400":
+          description: "Invalid username supplied"
+        "404":
+          description: "User not found"
+
+  /aktoer/hentSsnByAktoerId/{aktoerId}:
+    get:
+      tags:
+        - Aktør
+      summary: "Finn fødselsnummer fra aktør-ID"
+      description: ""
+      operationId: "getSsnByAktoerId"
+      parameters:
+        - name: "aktoerId"
+          in: "path"
+          description: "aktør-ID"
+          required: true
+      responses:
+        "200":
+          description: "successful operation"
+        "400":
+          description: "Invalid username supplied"
+        "404":
+          description: "User not found"
 
 components:
   schemas:
