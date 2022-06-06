@@ -1,6 +1,6 @@
 package no.nav.syfo.client.pdl
 
-data class PdlIdenterResponse(
+data class PdlHentIdenterResponse(
     val errors: List<PdlError>?,
     val data: PdlHentIdenter,
 )

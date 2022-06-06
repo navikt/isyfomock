@@ -31,7 +31,7 @@ paths:
     get:
       tags:
         - Aktør
-      summary: "Finn aktør-ID fra fødselsnummer"
+      summary: "Finn aktør-ID fra ssn"
       description: ""
       operationId: "getAktoerIdBySsn"
       parameters:
@@ -42,8 +42,6 @@ paths:
       responses:
         "200":
           description: "successful operation"
-        "400":
-          description: "Invalid username supplied"
         "404":
           description: "User not found"
 
@@ -51,19 +49,17 @@ paths:
     get:
       tags:
         - Aktør
-      summary: "Finn fødselsnummer fra aktør-ID"
+      summary: "Finn ssn fra aktør-ID"
       description: ""
       operationId: "getSsnByAktoerId"
       parameters:
         - name: "aktoerId"
           in: "path"
-          description: "aktør-ID"
+          description: "Aktør-ID"
           required: true
       responses:
         "200":
           description: "successful operation"
-        "400":
-          description: "Invalid username supplied"
         "404":
           description: "User not found"
 

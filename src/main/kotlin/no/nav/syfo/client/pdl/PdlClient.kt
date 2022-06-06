@@ -63,7 +63,7 @@ class PdlClient(
 
         when (response.status) {
             HttpStatusCode.OK -> {
-                val pdlPersonReponse = response.body<PdlIdenterResponse>()
+                val pdlPersonReponse = response.body<PdlHentIdenterResponse>()
                 return if (pdlPersonReponse.errors != null && pdlPersonReponse.errors.isNotEmpty()) {
                     COUNT_CALL_PDL_FAIL.increment()
                     pdlPersonReponse.errors.forEach {

@@ -5,7 +5,6 @@ data class Environment(
     val aadAppClient: String = getEnvVar("AZURE_APP_CLIENT_ID"),
     val aadAppSecret: String = getEnvVar("AZURE_APP_CLIENT_SECRET"),
     val aadTokenEndpoint: String = getEnvVar("AZURE_OPENID_CONFIG_TOKEN_ENDPOINT"),
-    val azureAppWellKnownUrl: String = getEnvVar("AZURE_APP_WELL_KNOWN_URL"),
     val mq: EnvironmentMQ = EnvironmentMQ(
         mqQueueManager = getEnvVar("MQGATEWAY_NAME"),
         mqHostname = getEnvVar("MQGATEWAY_HOSTNAME"),

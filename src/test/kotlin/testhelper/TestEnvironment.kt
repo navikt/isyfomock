@@ -2,10 +2,6 @@ package testhelper
 
 import no.nav.syfo.Environment
 import no.nav.syfo.EnvironmentMQ
-import no.nav.syfo.application.*
-import java.net.ServerSocket
-import java.util.*
-
 fun testEnvironment(
     azureTokenEndpoint: String = "azureTokenEndpoint",
     pdlUrl: String? = null,
@@ -13,7 +9,6 @@ fun testEnvironment(
     aadAppClient = "isyfomock-client-id",
     aadAppSecret = "isyfomock-secret",
     aadTokenEndpoint = azureTokenEndpoint,
-    azureAppWellKnownUrl = "wellknown",
     mq = EnvironmentMQ(
         mqQueueManager = "mogateway-name",
         mqHostname = "mogateway-hostname",
@@ -25,18 +20,3 @@ fun testEnvironment(
     pdlClientId = "pdlClientId",
     pdlUrl = pdlUrl ?: "http://pdl",
 )
-
-// TODO: unused?
-fun testAppState() = ApplicationState(
-    alive = true,
-    ready = true
-)
-
-fun getRandomPort() = ServerSocket(0).use {
-    it.localPort
-}
-
-fun Properties.overrideForTest(): Properties = apply {
-    remove("security.protocol")
-    remove("sasl.mechanism")
-}

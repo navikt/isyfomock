@@ -12,7 +12,6 @@ object Versions {
     const val logstashEncoder = "7.2"
     const val micrometerRegistry = "1.9.0"
     const val mq = "9.2.5.0"
-    const val nimbusjosejwt = "9.22"
     const val spek = "2.0.18"
     const val syfotjenester = "1.2021.06.09-13.09-b3d30de9996e"
     const val swaggerUi = "4.9.1"
@@ -46,7 +45,6 @@ dependencies {
     implementation("io.ktor:ktor-client-apache:${Versions.ktor}")
     implementation("io.ktor:ktor-client-content-negotiation:${Versions.ktor}")
     implementation("io.ktor:ktor-client-cio:${Versions.ktor}")
-    implementation("io.ktor:ktor-server-auth-jwt:${Versions.ktor}")
     implementation("io.ktor:ktor-server-content-negotiation:${Versions.ktor}")
     implementation("io.ktor:ktor-server-status-pages:${Versions.ktor}")
     implementation("io.ktor:ktor-server-netty:${Versions.ktor}")
@@ -75,7 +73,6 @@ dependencies {
 
     swaggerUI("org.webjars:swagger-ui:${Versions.swaggerUi}")
 
-    testImplementation("com.nimbusds:nimbus-jose-jwt:${Versions.nimbusjosejwt}")
     testImplementation("io.ktor:ktor-server-test-host:${Versions.ktor}")
     testImplementation("io.mockk:mockk:${Versions.mockk}")
     testImplementation("org.amshove.kluent:kluent:${Versions.kluent}")
