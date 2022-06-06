@@ -1,8 +1,21 @@
 package no.nav.syfo.client.pdl
 
-data class PdlPersonResponse(
+data class PdlIdenterResponse(
     val errors: List<PdlError>?,
-    val data: Any
+    val data: PdlHentIdenter,
+)
+
+data class PdlHentIdenter(
+    val hentIdenter: PdlIdenter,
+)
+
+data class PdlIdenter(
+    val identer: List<PdlIdent>,
+)
+data class PdlIdent(
+    val ident: String,
+    val historisk: Boolean,
+    val gruppe: String,
 )
 
 data class PdlError(

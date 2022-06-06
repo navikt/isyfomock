@@ -9,9 +9,9 @@ fun Route.registerAktoerApi(aktoerService: AktoerService) {
     get("/aktoer/hentAktoerIdBySsn/{ssn}") {
         try {
             val ssn = call.parameters["ssn"] ?: throw IllegalArgumentException()
-            val aktoerId = aktoerService.getAktoerIdFormSsn(ssn) ?: throw IllegalArgumentException()
+            val identer = aktoerService.getAktoerIdFormSsn(ssn) ?: throw IllegalArgumentException()
 
-            call.respond(aktoerId)
+            call.respond(identer)
         } catch (e: Exception) {
             call.respond(HttpStatusCode.NotFound)
         }
@@ -20,9 +20,9 @@ fun Route.registerAktoerApi(aktoerService: AktoerService) {
     get("/aktoer/hentSsnByAktoerId/{aktoerId}") {
         try {
             val aktoerId = call.parameters["aktoerId"] ?: throw IllegalArgumentException()
-            val ssn = aktoerService.getSsnFormAktoerId(aktoerId) ?: throw IllegalArgumentException()
+            val identer = aktoerService.getSsnFormAktoerId(aktoerId) ?: throw IllegalArgumentException()
 
-            call.respond(ssn)
+            call.respond(identer)
         } catch (e: Exception) {
             call.respond(HttpStatusCode.NotFound)
         }

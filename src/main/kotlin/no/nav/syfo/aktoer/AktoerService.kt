@@ -4,10 +4,10 @@ import no.nav.syfo.client.pdl.PdlClient
 
 class AktoerService(private val pdlClient: PdlClient) {
     suspend fun getSsnFormAktoerId(aktoerId: String): String? {
-        return pdlClient.fetchPdlFnrFraAktoer(aktoerId)
+        return pdlClient.fetchPdlSsnFraAktoerId(aktoerId)
     }
 
     suspend fun getAktoerIdFormSsn(ssn: String): String? {
-        return pdlClient.fetchPdlAktoerIDFraFnr(ssn)
+        return pdlClient.fetchPdlAktoerIdFraSsn(ssn)
     }
 }
