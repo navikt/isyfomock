@@ -42,6 +42,8 @@ dependencies {
     implementation(kotlin("reflect"))
 
     implementation("io.ktor:ktor-serialization-jackson:${Versions.ktor}")
+    implementation("io.ktor:ktor-client-apache:${Versions.ktor}")
+    implementation("io.ktor:ktor-client-content-negotiation:${Versions.ktor}")
     implementation("io.ktor:ktor-client-cio:${Versions.ktor}")
     implementation("io.ktor:ktor-server-content-negotiation:${Versions.ktor}")
     implementation("io.ktor:ktor-server-status-pages:${Versions.ktor}")

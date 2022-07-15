@@ -10,5 +10,5 @@ fun Application.testApiModule(
     applicationState: ApplicationState = ApplicationState(alive = true, ready = true),
     mqSender: MQSender = mockk()
 ) {
-    this.apiModule(applicationState = applicationState, mqSender = mqSender)
+    this.apiModule(applicationState = applicationState, mqSender = mqSender, environment = testEnvironment())
 }

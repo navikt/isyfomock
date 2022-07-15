@@ -8,8 +8,13 @@ import io.ktor.server.routing.*
 import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.server.plugins.statuspages.*
 import io.ktor.server.response.*
+import no.nav.syfo.Environment
+import no.nav.syfo.aktoer.AktoerService
+import no.nav.syfo.aktoer.registerAktoerApi
 import no.nav.syfo.application.ApplicationState
 import no.nav.syfo.application.metric.registerMetricApi
+import no.nav.syfo.client.azuread.AzureAdV2Client
+import no.nav.syfo.client.pdl.PdlClient
 import no.nav.syfo.configureJacksonMapper
 import no.nav.syfo.dialogmelding.DialogmeldingService
 import no.nav.syfo.dialogmelding.api.registerDialogmeldingApi
@@ -18,6 +23,7 @@ import no.nav.syfo.mq.MQSender
 fun Application.apiModule(
     applicationState: ApplicationState,
     mqSender: MQSender,
+    environment: Environment,
 ) {
     install(ContentNegotiation) {
         jackson(block = configureJacksonMapper())
@@ -45,12 +51,26 @@ fun Application.apiModule(
         }
     }
 
+    val azureAdV2Client = AzureAdV2Client(
+        aadAppClient = environment.aadAppClient,
+        aadAppSecret = environment.aadAppSecret,
+        aadTokenEndpoint = environment.aadTokenEndpoint,
+    )
+
+    val pdlClient = PdlClient(
+        azureAdV2Client = azureAdV2Client,
+        pdlClientId = environment.pdlClientId,
+        pdlUrl = environment.pdlUrl,
+    )
+
     val dialogmeldingService = DialogmeldingService(mqSender = mqSender)
+    val aktoerService = AktoerService(pdlClient = pdlClient)
 
     routing {
         registerPodApi(applicationState = applicationState)
         registerMetricApi()
         registerSwaggerDocApi()
         registerDialogmeldingApi(dialogmeldingService = dialogmeldingService)
+        registerAktoerApi(aktoerService = aktoerService)
     }
 }

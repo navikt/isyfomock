@@ -27,6 +27,42 @@ paths:
         '500':
           description: Internal server error
 
+  /aktoer/hentAktoerIdBySsn/{ssn}:
+    get:
+      tags:
+        - Aktør
+      summary: "Finn aktør-ID fra ssn"
+      description: ""
+      operationId: "getAktoerIdBySsn"
+      parameters:
+        - name: "ssn"
+          in: "path"
+          description: "Ssn"
+          required: true
+      responses:
+        "200":
+          description: "successful operation"
+        "404":
+          description: "User not found"
+
+  /aktoer/hentSsnByAktoerId/{aktoerId}:
+    get:
+      tags:
+        - Aktør
+      summary: "Finn ssn fra aktør-ID"
+      description: ""
+      operationId: "getSsnByAktoerId"
+      parameters:
+        - name: "aktoerId"
+          in: "path"
+          description: "Aktør-ID"
+          required: true
+      responses:
+        "200":
+          description: "successful operation"
+        "404":
+          description: "User not found"
+
 components:
   schemas:
     OpprettDialogmeldingRequest:

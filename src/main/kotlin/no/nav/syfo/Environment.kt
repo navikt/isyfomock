@@ -2,6 +2,9 @@ package no.nav.syfo
 
 data class Environment(
     val applicationPort: Int = getEnvVar("APPLICATION_PORT", "8080").toInt(),
+    val aadAppClient: String = getEnvVar("AZURE_APP_CLIENT_ID"),
+    val aadAppSecret: String = getEnvVar("AZURE_APP_CLIENT_SECRET"),
+    val aadTokenEndpoint: String = getEnvVar("AZURE_OPENID_CONFIG_TOKEN_ENDPOINT"),
     val mq: EnvironmentMQ = EnvironmentMQ(
         mqQueueManager = getEnvVar("MQGATEWAY_NAME"),
         mqHostname = getEnvVar("MQGATEWAY_HOSTNAME"),
@@ -10,6 +13,8 @@ data class Environment(
         mqChannelName = getEnvVar("MQGATEWAY_CHANNEL_NAME"),
         padm2Queuename = getEnvVar("PADM2_QUEUENAME"),
     ),
+    val pdlUrl: String = getEnvVar("PDL_URL"),
+    val pdlClientId: String = getEnvVar("PDL_CLIENT_ID"),
 )
 
 data class EnvironmentMQ(

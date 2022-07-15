@@ -15,11 +15,13 @@ val log: Logger = LoggerFactory.getLogger("no.nav.syfo.isyfomock")
 fun main() {
     val environment = Environment()
     val serviceUser = ServiceUser()
+    val applicationState = ApplicationState()
+
     val mqSender = MQSender(
         environmentMQ = environment.mq,
         serviceUser = serviceUser
     )
-    val applicationState = ApplicationState()
+
     val applicationEngineEnvironment = applicationEngineEnvironment {
         connector {
             port = environment.applicationPort
@@ -28,6 +30,7 @@ fun main() {
             apiModule(
                 mqSender = mqSender,
                 applicationState = applicationState,
+                environment = environment
             )
         }
     }
