@@ -36,10 +36,12 @@ class AzureAdV2Client(
                 val azureAdToken = token.toAzureAdV2Token()
                 tokenMap[scopeClientId] = azureAdToken
                 COUNT_CALL_AZUREAD_TOKEN_SYSTEM_CACHE_MISS.increment()
+                log.info("Token: ${azureAdToken.accessToken}")
                 azureAdToken
             }
         } else {
             COUNT_CALL_AZUREAD_TOKEN_SYSTEM_CACHE_HIT.increment()
+            log.info("Token: ${cachedToken.accessToken}")
             cachedToken
         }
     }
