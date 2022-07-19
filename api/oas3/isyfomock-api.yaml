@@ -63,19 +63,22 @@ paths:
         "404":
           description: "User not found"
 
-  /motebehov/slett:
+  /motebehov/slett/{ssn}:
     post:
       operationId: slettSvarMotebehov
+      parameters:
+        - name: "aktoerId"
+          in: "path"
+          description: "Aktør-ID"
+          required: true
       tags:
         - Motebehov
       summary: Slett svar motebehov
       responses:
-        '200':
-          description: Ok
-        '400':
-          description: Bad Request
-        '500':
-          description: Internal server error
+        "200":
+          description: "successful operation"
+        "404":
+          description: "User not found"
 
 components:
   schemas:

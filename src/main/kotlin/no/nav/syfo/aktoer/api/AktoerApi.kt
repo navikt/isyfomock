@@ -12,8 +12,8 @@ fun Route.registerAktoerApi(aktoerService: AktoerService) {
             val identer = aktoerService.getAktoerIdFormSsn(ssn) ?: throw IllegalArgumentException()
 
             call.respond(identer)
-        } catch (e: Exception) {
-            call.respond(HttpStatusCode.NotFound)
+        } catch (e: IllegalArgumentException) {
+            call.respond(HttpStatusCode.NotFound, "Could not find user")
         }
     }
 
@@ -23,8 +23,8 @@ fun Route.registerAktoerApi(aktoerService: AktoerService) {
             val identer = aktoerService.getSsnFormAktoerId(aktoerId) ?: throw IllegalArgumentException()
 
             call.respond(identer)
-        } catch (e: Exception) {
-            call.respond(HttpStatusCode.NotFound)
+        } catch (e: IllegalArgumentException) {
+            call.respond(HttpStatusCode.NotFound, "Could not find user")
         }
     }
 }

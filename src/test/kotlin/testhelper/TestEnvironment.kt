@@ -19,4 +19,5 @@ fun testEnvironment(
     ),
     pdlClientId = "pdlClientId",
     pdlUrl = pdlUrl ?: "http://pdl",
+    moetebehovUrl = "moetebehovUrl",
 )

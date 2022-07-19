@@ -18,8 +18,8 @@ import no.nav.syfo.client.pdl.PdlClient
 import no.nav.syfo.configureJacksonMapper
 import no.nav.syfo.dialogmelding.DialogmeldingService
 import no.nav.syfo.dialogmelding.api.registerDialogmeldingApi
-import no.nav.syfo.motebehov.MotebehovService
-import no.nav.syfo.motebehov.api.registerMotebehovApi
+import no.nav.syfo.moetebehov.MoetebehovService
+import no.nav.syfo.moetebehov.api.registerMotebehovApi
 import no.nav.syfo.mq.MQSender
 
 fun Application.apiModule(
@@ -66,7 +66,7 @@ fun Application.apiModule(
     )
 
     val dialogmeldingService = DialogmeldingService(mqSender = mqSender)
-    val motebehovService = MotebehovService()
+    val moetebehovService = MoetebehovService(moetebehovUrl = environment.moetebehovUrl)
     val aktoerService = AktoerService(pdlClient = pdlClient)
 
     routing {
@@ -74,7 +74,7 @@ fun Application.apiModule(
         registerMetricApi()
         registerSwaggerDocApi()
         registerDialogmeldingApi(dialogmeldingService = dialogmeldingService)
-        registerMotebehovApi(motebehovService = motebehovService)
+        registerMotebehovApi(moetebehovService = moetebehovService, aktoerService = aktoerService)
         registerAktoerApi(aktoerService = aktoerService)
     }
 }

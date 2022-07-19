@@ -52,3 +52,5 @@ spec:
       value: "dev-fss.pdl.pdl-api"
     - name: PDL_URL
       value: "https://pdl-api.dev-fss-pub.nais.io/graphql"
+    - name: MOETEBEHOV_URL
+      value: "https://syfomotebehov.dev.intern.nav.no/syfomotebehov/api"

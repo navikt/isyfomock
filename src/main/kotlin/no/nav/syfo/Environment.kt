@@ -15,6 +15,7 @@ data class Environment(
     ),
     val pdlUrl: String = getEnvVar("PDL_URL"),
     val pdlClientId: String = getEnvVar("PDL_CLIENT_ID"),
+    val moetebehovUrl: String = getEnvVar("MOETEBEHOV_URL")
 )
 
 data class EnvironmentMQ(
