@@ -6,24 +6,24 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
 fun Route.registerAktoerApi(aktoerService: AktoerService) {
-    get("/aktoer/hentAktoerIdBySsn/{ssn}") {
+    get("/aktoer/hentAktoerIdByFnr/{fnr}") {
         try {
-            val ssn = call.parameters["ssn"] ?: throw IllegalArgumentException()
-            val identer = aktoerService.getAktoerIdFormSsn(ssn) ?: throw IllegalArgumentException()
+            val fnr = call.parameters["fnr"] ?: throw IllegalArgumentException()
+            val identer = aktoerService.getAktoerIdFormFnr(fnr) ?: throw IllegalArgumentException()
 
             call.respond(identer)
-        } catch (e: IllegalArgumentException) {
+        } catch (e: Exception) {
             call.respond(HttpStatusCode.NotFound, "Could not find user")
         }
     }
 
-    get("/aktoer/hentSsnByAktoerId/{aktoerId}") {
+    get("/aktoer/hentFnrByAktoerId/{aktoerId}") {
         try {
             val aktoerId = call.parameters["aktoerId"] ?: throw IllegalArgumentException()
-            val identer = aktoerService.getSsnFormAktoerId(aktoerId) ?: throw IllegalArgumentException()
+            val identer = aktoerService.getFnrFormAktoerId(aktoerId) ?: throw IllegalArgumentException()
 
             call.respond(identer)
-        } catch (e: IllegalArgumentException) {
+        } catch (e: Exception) {
             call.respond(HttpStatusCode.NotFound, "Could not find user")
         }
     }

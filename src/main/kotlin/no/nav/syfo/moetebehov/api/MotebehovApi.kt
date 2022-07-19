@@ -11,14 +11,13 @@ fun Route.registerMotebehovApi(
     moetebehovService: MoetebehovService,
     aktoerService: AktoerService
 ) {
-
-    post("/moetebehov/slett/{ssn}") {
+    delete("/moetebehov/slett/{fnr}") {
         try {
-            val ssn = call.parameters["ssn"] ?: throw IllegalArgumentException()
-            val aktoerId = aktoerService.getAktoerIdFormSsn(ssn) ?: throw IllegalArgumentException()
+            val fnr = call.parameters["fnr"] ?: throw IllegalArgumentException()
+            val aktoerId = aktoerService.getAktoerIdFormFnr(fnr) ?: throw IllegalArgumentException()
 
             call.respond(HttpStatusCode.OK, moetebehovService.deleteMoetebehov(aktoerId))
-        } catch (e: IllegalArgumentException) {
+        } catch (e: Exception) {
             call.respond(HttpStatusCode.NotFound, "Could not find user")
         }
     }

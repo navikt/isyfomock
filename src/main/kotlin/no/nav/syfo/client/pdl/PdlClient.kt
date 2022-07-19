@@ -27,12 +27,12 @@ class PdlClient(
 
     private val httpClient = httpClientDefault()
 
-    suspend fun fetchPdlSsnFraAktoerId(aktoerId: String): String? {
+    suspend fun fetchPdlFnrFraAktoerId(aktoerId: String): String? {
         return fetchPdlIdenter(aktoerId, IdentGruppe.FOLKEREGISTERIDENT)
     }
 
-    suspend fun fetchPdlAktoerIdFraSsn(ssn: String): String? {
-        return fetchPdlIdenter(ssn, IdentGruppe.AKTORID)
+    suspend fun fetchPdlAktoerIdFraFnr(fnr: String): String? {
+        return fetchPdlIdenter(fnr, IdentGruppe.AKTORID)
     }
 
     suspend fun fetchPdlIdenter(identId: String, identType: IdentGruppe): String? {

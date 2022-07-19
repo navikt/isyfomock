@@ -18,7 +18,7 @@ class MoetebehovService(
 
         when (response.status) {
             HttpStatusCode.OK -> {
-                response.body<String>()
+                response.body<Any>().toString()
             }
             else -> {
                 logger.error("Unable to delete moetebehov: ${response.status.value}")

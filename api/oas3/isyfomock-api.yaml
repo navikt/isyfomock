@@ -27,17 +27,17 @@ paths:
         '500':
           description: Internal server error
 
-  /aktoer/hentAktoerIdBySsn/{ssn}:
+  /aktoer/hentAktoerIdByFnr/{fnr}:
     get:
       tags:
         - Aktør
-      summary: "Finn aktør-ID fra ssn"
+      summary: "Finn aktør-ID fra fnr"
       description: ""
-      operationId: "getAktoerIdBySsn"
+      operationId: "getAktoerIdByFnr"
       parameters:
-        - name: "ssn"
+        - name: "fnr"
           in: "path"
-          description: "Ssn"
+          description: "Fødselsnummer"
           required: true
       responses:
         "200":
@@ -45,13 +45,13 @@ paths:
         "404":
           description: "User not found"
 
-  /aktoer/hentSsnByAktoerId/{aktoerId}:
+  /aktoer/hentFnrByAktoerId/{aktoerId}:
     get:
       tags:
         - Aktør
-      summary: "Finn ssn fra aktør-ID"
+      summary: "Finn fnr fra aktør-ID"
       description: ""
-      operationId: "getSsnByAktoerId"
+      operationId: "getFnrByAktoerId"
       parameters:
         - name: "aktoerId"
           in: "path"
@@ -63,13 +63,13 @@ paths:
         "404":
           description: "User not found"
 
-  /motebehov/slett/{ssn}:
-    post:
+  /moetebehov/slett/{fnr}:
+    delete:
       operationId: slettSvarMotebehov
       parameters:
-        - name: "aktoerId"
+        - name: "fnr"
           in: "path"
-          description: "Aktør-ID"
+          description: "Fødselsnummer"
           required: true
       tags:
         - Motebehov
