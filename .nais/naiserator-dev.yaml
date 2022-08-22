@@ -35,6 +35,11 @@ spec:
   azure:
     application:
       enabled: true
+  accessPolicy:
+    outbound:
+      rules:
+        - application: syfomotebehov
+        - application: syfooppfolgingsplanservice
   envFrom:
     - secret: isyfomock-serviceuser
   env:
@@ -52,3 +57,7 @@ spec:
       value: "dev-fss.pdl.pdl-api"
     - name: PDL_URL
       value: "https://pdl-api.dev-fss-pub.nais.io/graphql"
+    - name: MOTEBEHOV_URL
+      value: "https://syfomotebehov.dev-fss-pub.nais.io/syfomotebehov"
+    - name: OPPFOLGINGSPLAN_URL
+      value: "https://syfooppfolgingsplanservice.dev-fss-pub.nais.io/syfooppfolgingsplanservice"

@@ -27,41 +27,90 @@ paths:
         '500':
           description: Internal server error
 
-  /aktoer/hentAktoerIdBySsn/{ssn}:
+  /aktor/hentAktorIdByFnr/{fnr}:
     get:
       tags:
         - Aktør
-      summary: "Finn aktør-ID fra ssn"
-      description: ""
-      operationId: "getAktoerIdBySsn"
+      summary: Finn aktør-ID fra fnr
+      operationId: getAktorIdByFnr
       parameters:
-        - name: "ssn"
-          in: "path"
-          description: "Ssn"
+        - name: fnr
+          in: path
+          description: Fødselsnummer
           required: true
       responses:
         "200":
-          description: "successful operation"
+          description: Successful operation
         "404":
-          description: "User not found"
+          description: User not found
 
-  /aktoer/hentSsnByAktoerId/{aktoerId}:
+  /aktor/hentFnrByAktorId/{aktorId}:
     get:
       tags:
         - Aktør
-      summary: "Finn ssn fra aktør-ID"
-      description: ""
-      operationId: "getSsnByAktoerId"
+      summary: Finn fnr fra aktør-ID
+      operationId: getFnrByAktorId
       parameters:
-        - name: "aktoerId"
-          in: "path"
-          description: "Aktør-ID"
+        - name: aktorId
+          in: path
+          description: Aktør-ID
           required: true
       responses:
         "200":
-          description: "successful operation"
+          description: successful operation
         "404":
-          description: "User not found"
+          description: User not found
+
+  /motebehov/slett/{fnr}:
+    delete:
+      operationId: slettSvarMotebehov
+      parameters:
+        - name: fnr
+          in: path
+          description: Fødselsnummer
+          required: true
+      tags:
+        - Motebehov
+      summary: Slett svar motebehov
+      responses:
+        "200":
+          description: Successful operation
+        "404":
+          description: User not found
+
+  /oppfolgingsplan/slett/arbeidstaker/{fnr}:
+    delete:
+      operationId: slettOppfolgingsplan
+      parameters:
+        - name: fnr
+          in: path
+          description: Fødselsnummer
+          required: true
+      tags:
+        - Oppfølgingsplan
+      summary: Slett oppfolgingsplan knyttet til fødselsnummer
+      responses:
+        "200":
+          description: Successful operation
+        "404":
+          description: User not found
+
+  /oppfolgingsplan/slett/{id}:
+    delete:
+      operationId: slettOppfolgingsplan
+      parameters:
+        - name: id
+          in: path
+          description: Oppfølgingsplan ID
+          required: true
+      tags:
+        - Oppfølgingsplan
+      summary: Slett oppfolgingsplan med id
+      responses:
+        "200":
+          description: Successful operation
+        "404":
+          description: User not found
 
 components:
   schemas:
