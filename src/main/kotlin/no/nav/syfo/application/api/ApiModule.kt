@@ -9,8 +9,8 @@ import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.server.plugins.statuspages.*
 import io.ktor.server.response.*
 import no.nav.syfo.Environment
-import no.nav.syfo.aktoer.AktoerService
-import no.nav.syfo.aktoer.registerAktoerApi
+import no.nav.syfo.aktor.AktorService
+import no.nav.syfo.aktor.registerAktorApi
 import no.nav.syfo.application.ApplicationState
 import no.nav.syfo.application.metric.registerMetricApi
 import no.nav.syfo.client.azuread.AzureAdV2Client
@@ -18,7 +18,11 @@ import no.nav.syfo.client.pdl.PdlClient
 import no.nav.syfo.configureJacksonMapper
 import no.nav.syfo.dialogmelding.DialogmeldingService
 import no.nav.syfo.dialogmelding.api.registerDialogmeldingApi
+import no.nav.syfo.motebehov.MotebehovService
+import no.nav.syfo.motebehov.api.registerMotebehovApi
 import no.nav.syfo.mq.MQSender
+import no.nav.syfo.oppfolgingsplan.OppfolgingsplanService
+import no.nav.syfo.oppfolgingsplan.registerOppfolgingsplanApi
 
 fun Application.apiModule(
     applicationState: ApplicationState,
@@ -64,13 +68,17 @@ fun Application.apiModule(
     )
 
     val dialogmeldingService = DialogmeldingService(mqSender = mqSender)
-    val aktoerService = AktoerService(pdlClient = pdlClient)
+    val motebehovService = MotebehovService(motebehovUrl = environment.motebehovUrl, pdlClient = pdlClient)
+    val aktorService = AktorService(pdlClient = pdlClient)
+    val oppfolgingsplanService = OppfolgingsplanService(oppfolgingsplanUrl = environment.oppfolgingsplanUrl)
 
     routing {
         registerPodApi(applicationState = applicationState)
         registerMetricApi()
         registerSwaggerDocApi()
         registerDialogmeldingApi(dialogmeldingService = dialogmeldingService)
-        registerAktoerApi(aktoerService = aktoerService)
+        registerMotebehovApi(motebehovService = motebehovService)
+        registerAktorApi(aktorService = aktorService)
+        registerOppfolgingsplanApi(oppfolgingsplanService = oppfolgingsplanService)
     }
 }

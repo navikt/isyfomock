@@ -19,4 +19,6 @@ fun testEnvironment(
     ),
     pdlClientId = "pdlClientId",
     pdlUrl = pdlUrl ?: "http://pdl",
+    motebehovUrl = "moetebehovUrl",
+    oppfolgingsplanUrl = "oppfolgingsplanUrl",
 )

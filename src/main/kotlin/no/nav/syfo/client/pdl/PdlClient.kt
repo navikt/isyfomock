@@ -27,15 +27,15 @@ class PdlClient(
 
     private val httpClient = httpClientDefault()
 
-    suspend fun fetchPdlSsnFraAktoerId(aktoerId: String): String? {
-        return fetchPdlIdenter(aktoerId, IdentGruppe.FOLKEREGISTERIDENT)
+    suspend fun fetchPdlFnrFraAktorId(aktorId: String): List<PdlIdent>? {
+        return fetchPdlIdenter(aktorId, IdentGruppe.FOLKEREGISTERIDENT)
     }
 
-    suspend fun fetchPdlAktoerIdFraSsn(ssn: String): String? {
-        return fetchPdlIdenter(ssn, IdentGruppe.AKTORID)
+    suspend fun fetchPdlAktorIdFraFnr(fnr: String): List<PdlIdent>? {
+        return fetchPdlIdenter(fnr, IdentGruppe.AKTORID)
     }
 
-    suspend fun fetchPdlIdenter(identId: String, identType: IdentGruppe): String? {
+    suspend fun fetchPdlIdenter(identId: String, identType: IdentGruppe): List<PdlIdent>? {
         val query =
             """
             query(${'$'}ident: ID!) {
@@ -72,7 +72,7 @@ class PdlClient(
                     null
                 } else {
                     COUNT_CALL_PDL_SUCCESS.increment()
-                    pdlPersonReponse.data.hentIdenter.identer.toString()
+                    pdlPersonReponse.data.hentIdenter.identer
                 }
             }
             else -> {
