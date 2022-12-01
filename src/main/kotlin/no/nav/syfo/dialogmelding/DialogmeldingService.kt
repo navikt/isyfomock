@@ -11,6 +11,7 @@ import no.nav.syfo.util.marshallFellesformat
 import no.nav.xml.eiff._2.XMLEIFellesformat
 import no.nav.xml.eiff._2.XMLMottakenhetBlokk
 import java.io.StringReader
+import java.time.LocalDateTime
 import java.util.*
 import javax.xml.datatype.DatatypeFactory
 
@@ -43,6 +44,7 @@ class DialogmeldingService(private val mqSender: MQSender) {
         xmlFellesformat.get<XMLMsgHead>().document[0].refDoc.content.any[0] = xmlDialogmelding
 
         xmlFellesformat.get<XMLMsgHead>().msgInfo.msgId = "$MSG_ID_PREFIX-${request.msgId}"
+        xmlFellesformat.get<XMLMsgHead>().msgInfo.genDate = LocalDateTime.now()
         xmlFellesformat.get<XMLMottakenhetBlokk>().ediLoggId = UUID.randomUUID().toString()
         xmlFellesformat.get<XMLMottakenhetBlokk>().mottattDatotid =
             DatatypeFactory.newInstance().newXMLGregorianCalendar(GregorianCalendar())
