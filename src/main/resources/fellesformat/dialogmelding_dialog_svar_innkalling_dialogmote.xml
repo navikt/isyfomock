@@ -106,7 +106,7 @@
                     <Dialogmelding
                             xmlns="http://www.kith.no/xmlstds/dialog/2006-10-11" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.kith.no/xmlstds/dialog/2006-10-11 dialogmelding.xsd">
                         <Notat>
-                            <TemaKodet DN="Ja, jeg kommer" S="2.16.578.1.12.4.1.1.8126" V="1"/>
+                            <TemaKodet DN="Jeg kan ikke komme" S="2.16.578.1.12.4.1.1.8126" V="3"/>
                             <TekstNotatInnhold>Ta gjerne kontakt ang hvilket telefonnummer jeg skal ringe. Mvh Inga F. Valda.</TekstNotatInnhold>
                             <DokIdNotat>OD2010199930316</DokIdNotat>
                             <DatoNotat>2020-09-21</DatoNotat>
