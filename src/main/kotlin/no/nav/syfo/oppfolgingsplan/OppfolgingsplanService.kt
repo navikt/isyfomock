@@ -14,7 +14,7 @@ class OppfolgingsplanService(
     private val logger: Logger = LoggerFactory.getLogger(OppfolgingsplanService::class.java),
 ) {
     suspend fun deleteOppfolgingsplanerForArbeidstaker(fnr: String): String {
-        val response = httpClient.delete("$oppfolgingsplanUrl/internal/oppfolgingsplan/slett/person/$fnr")
+        val response = httpClient.delete("$oppfolgingsplanUrl/internal/v2/oppfolgingsplan/slett/person/$fnr")
 
         return when (response.status) {
             HttpStatusCode.OK -> {
@@ -29,7 +29,7 @@ class OppfolgingsplanService(
     }
 
     suspend fun deleteOppfolgingsplan(oppfolgingsplanId: String): String {
-        val response = httpClient.delete("$oppfolgingsplanUrl/internal/oppfolgingsplan/slett/$oppfolgingsplanId")
+        val response = httpClient.delete("$oppfolgingsplanUrl/internal/v2/oppfolgingsplan/slett/$oppfolgingsplanId")
 
         return when (response.status) {
             HttpStatusCode.OK -> {
