@@ -2,8 +2,6 @@ name: main
 
 on: push
 
-env:
-  IMAGE: docker.pkg.github.com/${{ github.repository }}/isyfomock:${{ github.sha }}
 
 jobs:
   build:
@@ -12,6 +10,9 @@ jobs:
     env:
       ORG_GRADLE_PROJECT_githubUser: x-access-token
       ORG_GRADLE_PROJECT_githubPassword: ${{ secrets.GITHUB_TOKEN }}
+    permissions:
+      contents: "read"
+      id-token: "write"
     steps:
       - name: Setup java
         uses: actions/setup-java@v3
@@ -48,13 +49,15 @@ jobs:
         run: |
           cosign verify --key distroless.pub gcr.io/distroless/java17
       - name: Build and publish Docker image
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          docker build --tag ${IMAGE} .
-          docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} -p ${GITHUB_TOKEN}
-          docker push ${IMAGE}
-          echo ${IMAGE}
+        uses: nais/docker-build-push@v0
+        id: docker-build-push
+        with:
+          team: teamsykefravr
+          identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
+          project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
+          tag: ${{ github.sha }}
+    outputs:
+      image: ${{ steps.docker-build-push.outputs.image }}
 
   deploy-dev:
     if: github.ref == 'refs/heads/master'
@@ -68,3 +71,4 @@ jobs:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: dev-gcp
           RESOURCE: .nais/naiserator-dev.yaml
+          VAR: image=${{ needs.build.outputs.image }}
