@@ -5,7 +5,7 @@ info:
   description: API for Team iSYFO sin mock
   version: 1.0.0
 servers:
-  - url: 'https://isyfomock.dev.intern.nav.no'
+  - url: 'https://isyfomock.intern.dev.nav.no'
 paths:
   /dialogmelding/opprett:
     post:
