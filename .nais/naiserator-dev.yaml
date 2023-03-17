@@ -32,6 +32,7 @@ spec:
       memory: 768Mi
   ingresses:
     - "https://isyfomock.dev.intern.nav.no"
+    - "https://isyfomock.intern.dev.nav.no"
   azure:
     application:
       enabled: true
