@@ -37,9 +37,11 @@ spec:
       enabled: true
   accessPolicy:
     outbound:
-      rules:
-        - application: syfomotebehov
-        - application: syfooppfolgingsplanservice
+      external:
+        - host: "b27apvl221.preprod.local"
+        - host: "syfomotebehov.dev-fss-pub.nais.io"
+        - host: "syfooppfolgingsplanservice.dev-fss-pub.nais.io"
+        - host: "pdl-api.dev-fss-pub.nais.io"
   envFrom:
     - secret: isyfomock-serviceuser
   env:
