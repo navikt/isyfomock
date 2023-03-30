@@ -27,9 +27,17 @@ class DialogmeldingApiSpek : Spek({
     val legeFnr = "23456789123"
     val notat = "kjempefint notat"
     val orgnr = "889640782"
+    val partnerId = "123"
     val svarInnkallingKodeverk = "2.16.578.1.12.4.1.1.8126"
     val henvendelseKodeverk = "2.16.578.1.12.4.1.1.8128"
     val svarForesporselKodeverk = "2.16.578.1.12.4.1.1.9069"
+
+    val defaultRequestParams = arrayOf(
+        OpprettDialogmeldingRequestParameters.pasientFnr to pasientFnr,
+        OpprettDialogmeldingRequestParameters.notat to notat,
+        OpprettDialogmeldingRequestParameters.legeFnr to legeFnr,
+        OpprettDialogmeldingRequestParameters.partnerId to partnerId,
+    )
 
     with(TestApplicationEngine()) {
         start()
@@ -48,9 +56,7 @@ class DialogmeldingApiSpek : Spek({
                 it("oppretter vanlig dialogmelding") {
                     justRun { mqSender.send(any()) }
                     val requestParameters = listOf(
-                        OpprettDialogmeldingRequestParameters.pasientFnr to pasientFnr,
-                        OpprettDialogmeldingRequestParameters.notat to notat,
-                        OpprettDialogmeldingRequestParameters.legeFnr to legeFnr,
+                        *defaultRequestParams,
                         OpprettDialogmeldingRequestParameters.type to DialogmeldingType.VANLIG.toString(),
                     )
 
@@ -68,9 +74,7 @@ class DialogmeldingApiSpek : Spek({
                 it("oppretter dialogmelding med vedlegg") {
                     justRun { mqSender.send(any()) }
                     val requestParameters = listOf(
-                        OpprettDialogmeldingRequestParameters.pasientFnr to pasientFnr,
-                        OpprettDialogmeldingRequestParameters.notat to notat,
-                        OpprettDialogmeldingRequestParameters.legeFnr to legeFnr,
+                        *defaultRequestParams,
                         OpprettDialogmeldingRequestParameters.type to DialogmeldingType.VEDLEGG.toString(),
                     )
 
@@ -89,9 +93,7 @@ class DialogmeldingApiSpek : Spek({
                     val messageSlot = slot<String>()
                     justRun { mqSender.send(capture(messageSlot)) }
                     val requestParameters = listOf(
-                        OpprettDialogmeldingRequestParameters.pasientFnr to pasientFnr,
-                        OpprettDialogmeldingRequestParameters.notat to notat,
-                        OpprettDialogmeldingRequestParameters.legeFnr to legeFnr,
+                        *defaultRequestParams,
                         OpprettDialogmeldingRequestParameters.type to DialogmeldingType.VANLIG.toString(),
                     )
 
@@ -122,9 +124,7 @@ class DialogmeldingApiSpek : Spek({
                     val messageSlot = slot<String>()
                     justRun { mqSender.send(capture(messageSlot)) }
                     val requestParameters = listOf(
-                        OpprettDialogmeldingRequestParameters.pasientFnr to pasientFnr,
-                        OpprettDialogmeldingRequestParameters.notat to notat,
-                        OpprettDialogmeldingRequestParameters.legeFnr to legeFnr,
+                        *defaultRequestParams,
                         OpprettDialogmeldingRequestParameters.type to DialogmeldingType.VEDLEGG.toString(),
                     )
 
@@ -164,9 +164,7 @@ class DialogmeldingApiSpek : Spek({
                     val messageSlot = slot<String>()
                     justRun { mqSender.send(capture(messageSlot)) }
                     val requestParameters = listOf(
-                        OpprettDialogmeldingRequestParameters.pasientFnr to pasientFnr,
-                        OpprettDialogmeldingRequestParameters.notat to notat,
-                        OpprettDialogmeldingRequestParameters.legeFnr to legeFnr,
+                        *defaultRequestParams,
                         OpprettDialogmeldingRequestParameters.type to DialogmeldingType.SVAR_MOTEINNKALLING.toString(),
                     )
 
@@ -199,9 +197,7 @@ class DialogmeldingApiSpek : Spek({
                     val messageSlot = slot<String>()
                     justRun { mqSender.send(capture(messageSlot)) }
                     val requestParameters = listOf(
-                        OpprettDialogmeldingRequestParameters.pasientFnr to pasientFnr,
-                        OpprettDialogmeldingRequestParameters.notat to notat,
-                        OpprettDialogmeldingRequestParameters.legeFnr to legeFnr,
+                        *defaultRequestParams,
                         OpprettDialogmeldingRequestParameters.type to DialogmeldingType.SVAR_FORESPORSEL.toString(),
                     )
 
@@ -236,9 +232,7 @@ class DialogmeldingApiSpek : Spek({
                     val messageSlot = slot<String>()
                     justRun { mqSender.send(capture(messageSlot)) }
                     val requestParameters = listOf(
-                        OpprettDialogmeldingRequestParameters.pasientFnr to pasientFnr,
-                        OpprettDialogmeldingRequestParameters.notat to notat,
-                        OpprettDialogmeldingRequestParameters.legeFnr to legeFnr,
+                        *defaultRequestParams,
                         OpprettDialogmeldingRequestParameters.type to DialogmeldingType.SVAR_FORESPORSEL_VEDLEGG.toString(),
                     )
 
@@ -279,9 +273,7 @@ class DialogmeldingApiSpek : Spek({
                     val refToConversation = UUID.randomUUID().toString()
                     val refToParent = UUID.randomUUID().toString()
                     val requestParameters = listOf(
-                        OpprettDialogmeldingRequestParameters.pasientFnr to pasientFnr,
-                        OpprettDialogmeldingRequestParameters.notat to notat,
-                        OpprettDialogmeldingRequestParameters.legeFnr to legeFnr,
+                        *defaultRequestParams,
                         OpprettDialogmeldingRequestParameters.type to DialogmeldingType.SVAR_MOTEINNKALLING.toString(),
                         OpprettDialogmeldingRequestParameters.refToConversation to refToConversation,
                         OpprettDialogmeldingRequestParameters.refToParent to refToParent,
@@ -307,9 +299,7 @@ class DialogmeldingApiSpek : Spek({
                     justRun { mqSender.send(capture(messageSlot)) }
 
                     val requestParameters = listOf(
-                        OpprettDialogmeldingRequestParameters.pasientFnr to pasientFnr,
-                        OpprettDialogmeldingRequestParameters.notat to notat,
-                        OpprettDialogmeldingRequestParameters.legeFnr to legeFnr,
+                        *defaultRequestParams,
                         OpprettDialogmeldingRequestParameters.type to DialogmeldingType.VANLIG.toString(),
                         OpprettDialogmeldingRequestParameters.refToConversation to UUID.randomUUID().toString(),
                         OpprettDialogmeldingRequestParameters.refToParent to UUID.randomUUID().toString(),
@@ -331,9 +321,7 @@ class DialogmeldingApiSpek : Spek({
                     justRun { mqSender.send(capture(messageSlot)) }
 
                     val requestParameters = listOf(
-                        OpprettDialogmeldingRequestParameters.pasientFnr to pasientFnr,
-                        OpprettDialogmeldingRequestParameters.notat to null,
-                        OpprettDialogmeldingRequestParameters.legeFnr to legeFnr,
+                        *defaultRequestParams,
                         OpprettDialogmeldingRequestParameters.type to DialogmeldingType.SVAR_MOTEINNKALLING.toString(),
                         OpprettDialogmeldingRequestParameters.refToConversation to null,
                         OpprettDialogmeldingRequestParameters.refToParent to null,

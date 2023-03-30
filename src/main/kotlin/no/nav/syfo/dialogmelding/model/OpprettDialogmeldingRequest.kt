@@ -10,5 +10,5 @@ data class OpprettDialogmeldingRequest(
     val notat: String?,
     val refToParent: String?,
     val refToConversation: String?,
-    val partnerId: String?,
+    val partnerId: String,
 )
