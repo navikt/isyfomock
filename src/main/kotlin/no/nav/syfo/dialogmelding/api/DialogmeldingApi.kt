@@ -35,7 +35,7 @@ fun Route.registerDialogmeldingApi(dialogmeldingService: DialogmeldingService) {
             notat = formParameters[OpprettDialogmeldingRequestParameters.notat],
             refToParent = formParameters[OpprettDialogmeldingRequestParameters.refToParent],
             refToConversation = formParameters[OpprettDialogmeldingRequestParameters.refToConversation],
-            partnerId = formParameters[OpprettDialogmeldingRequestParameters.partnerId],
+            partnerId = formParameters.getOrFail(OpprettDialogmeldingRequestParameters.partnerId),
         )
 
         dialogmeldingService.opprettDialogmelding(request)

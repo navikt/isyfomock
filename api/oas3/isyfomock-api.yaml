@@ -145,7 +145,9 @@ components:
         partnerId:
           description: PartnerId for å identifisere kontoret meldingen sendes fra
           type: string
+          example: '123'
       required:
         - type
         - pasientFnr
         - legeFnr
+        - partnerId
