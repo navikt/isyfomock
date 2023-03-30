@@ -20,7 +20,7 @@ object Versions {
 plugins {
     kotlin("jvm") version "1.6.21"
     id("com.github.johnrengelman.shadow") version "7.1.2"
-    id("org.jlleitschuh.gradle.ktlint") version "10.3.0"
+    id("org.jlleitschuh.gradle.ktlint") version "11.3.1"
     id("org.hidetake.swagger.generator") version "2.19.2" apply true
 }
 
