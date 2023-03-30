@@ -39,6 +39,10 @@ spec:
     outbound:
       external:
         - host: "b27apvl221.preprod.local"
+          ports:
+            - name: MQ
+              port: 1413
+              protocol: TCP
         - host: "syfomotebehov.dev-fss-pub.nais.io"
         - host: "syfooppfolgingsplanservice.dev-fss-pub.nais.io"
         - host: "pdl-api.dev-fss-pub.nais.io"
