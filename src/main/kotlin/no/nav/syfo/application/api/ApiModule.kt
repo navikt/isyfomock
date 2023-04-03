@@ -39,15 +39,15 @@ fun Application.apiModule(
             val response: Pair<HttpStatusCode, String> = when (cause) {
                 is ResponseException -> Pair(
                     cause.response.status,
-                    cause.message ?: "Unknown error"
+                    cause.message ?: "Unknown error",
                 )
                 is IllegalArgumentException -> Pair(
                     HttpStatusCode.BadRequest,
-                    cause.message ?: "Unknown error"
+                    cause.message ?: "Unknown error",
                 )
                 else -> Pair(
                     HttpStatusCode.InternalServerError,
-                    "The server reported an unexpected error and cannot complete the request."
+                    "The server reported an unexpected error and cannot complete the request.",
                 )
             }
 

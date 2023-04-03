@@ -2,10 +2,10 @@ package no.nav.syfo.client.pdl
 
 data class PdlRequest(
     val query: String,
-    val variables: Variables
+    val variables: Variables,
 )
 
 data class Variables(
     val ident: String,
-    val navnHistorikk: Boolean = false
+    val navnHistorikk: Boolean = false,
 )

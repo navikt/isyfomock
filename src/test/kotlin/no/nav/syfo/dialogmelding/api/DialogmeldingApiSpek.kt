@@ -64,7 +64,7 @@ class DialogmeldingApiSpek : Spek({
                         handleRequest(HttpMethod.Post, url) {
                             addHeader("Content-Type", ContentType.Application.FormUrlEncoded.toString())
                             setBody(requestParameters.formUrlEncode())
-                        }
+                        },
                     ) {
                         response.status() shouldBeEqualTo HttpStatusCode.OK
 
@@ -82,7 +82,7 @@ class DialogmeldingApiSpek : Spek({
                         handleRequest(HttpMethod.Post, url) {
                             addHeader("Content-Type", ContentType.Application.FormUrlEncoded.toString())
                             setBody(requestParameters.formUrlEncode())
-                        }
+                        },
                     ) {
                         response.status() shouldBeEqualTo HttpStatusCode.OK
 
@@ -101,7 +101,7 @@ class DialogmeldingApiSpek : Spek({
                         handleRequest(HttpMethod.Post, url) {
                             addHeader("Content-Type", ContentType.Application.FormUrlEncoded.toString())
                             setBody(requestParameters.formUrlEncode())
-                        }
+                        },
                     ) {
                         response.status() shouldBeEqualTo HttpStatusCode.OK
 
@@ -132,7 +132,7 @@ class DialogmeldingApiSpek : Spek({
                         handleRequest(HttpMethod.Post, url) {
                             addHeader("Content-Type", ContentType.Application.FormUrlEncoded.toString())
                             setBody(requestParameters.formUrlEncode())
-                        }
+                        },
                     ) {
                         response.status() shouldBeEqualTo HttpStatusCode.OK
 
@@ -172,7 +172,7 @@ class DialogmeldingApiSpek : Spek({
                         handleRequest(HttpMethod.Post, url) {
                             addHeader("Content-Type", ContentType.Application.FormUrlEncoded.toString())
                             setBody(requestParameters.formUrlEncode())
-                        }
+                        },
                     ) {
                         response.status() shouldBeEqualTo HttpStatusCode.OK
 
@@ -205,7 +205,7 @@ class DialogmeldingApiSpek : Spek({
                         handleRequest(HttpMethod.Post, url) {
                             addHeader("Content-Type", ContentType.Application.FormUrlEncoded.toString())
                             setBody(requestParameters.formUrlEncode())
-                        }
+                        },
                     ) {
                         response.status() shouldBeEqualTo HttpStatusCode.OK
 
@@ -240,7 +240,7 @@ class DialogmeldingApiSpek : Spek({
                         handleRequest(HttpMethod.Post, url) {
                             addHeader("Content-Type", ContentType.Application.FormUrlEncoded.toString())
                             setBody(requestParameters.formUrlEncode())
-                        }
+                        },
                     ) {
                         response.status() shouldBeEqualTo HttpStatusCode.OK
 
@@ -283,7 +283,7 @@ class DialogmeldingApiSpek : Spek({
                         handleRequest(HttpMethod.Post, url) {
                             addHeader("Content-Type", ContentType.Application.FormUrlEncoded.toString())
                             setBody(requestParameters.formUrlEncode())
-                        }
+                        },
                     ) {
                         response.status() shouldBeEqualTo HttpStatusCode.OK
 
@@ -309,7 +309,7 @@ class DialogmeldingApiSpek : Spek({
                         handleRequest(HttpMethod.Post, url) {
                             addHeader("Content-Type", ContentType.Application.FormUrlEncoded.toString())
                             setBody(requestParameters.formUrlEncode())
-                        }
+                        },
                     ) {
                         response.status() shouldBeEqualTo HttpStatusCode.BadRequest
 
@@ -331,7 +331,7 @@ class DialogmeldingApiSpek : Spek({
                         handleRequest(HttpMethod.Post, url) {
                             addHeader("Content-Type", ContentType.Application.FormUrlEncoded.toString())
                             setBody(requestParameters.formUrlEncode())
-                        }
+                        },
                     ) {
                         response.status() shouldBeEqualTo HttpStatusCode.OK
                     }
@@ -339,7 +339,7 @@ class DialogmeldingApiSpek : Spek({
             }
         }
     }
-})
+},)
 
 fun getOpprettetDialogmeldingFellesformatXml(messageSlot: CapturingSlot<String>): OpprettDialogmeldingFellesformatXml {
     val actualMqMessage = messageSlot.captured
@@ -350,7 +350,7 @@ fun getOpprettetDialogmeldingFellesformatXml(messageSlot: CapturingSlot<String>)
     return OpprettDialogmeldingFellesformatXml(
         msgHead = msgHead,
         dialogmelding = msgHead.document.first().refDoc.content.any.first() as XMLDialogmelding,
-        mottaksMeta = actualFellesformatXml.get()
+        mottaksMeta = actualFellesformatXml.get(),
     )
 }
 
