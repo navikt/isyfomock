@@ -19,7 +19,7 @@ fun main() {
 
     val mqSender = MQSender(
         environmentMQ = environment.mq,
-        serviceUser = serviceUser
+        serviceUser = serviceUser,
     )
 
     val applicationEngineEnvironment = applicationEngineEnvironment {
@@ -30,7 +30,7 @@ fun main() {
             apiModule(
                 mqSender = mqSender,
                 applicationState = applicationState,
-                environment = environment
+                environment = environment,
             )
         }
     }
@@ -48,7 +48,7 @@ fun main() {
     Runtime.getRuntime().addShutdownHook(
         Thread {
             server.stop(10, 10, TimeUnit.SECONDS)
-        }
+        },
     )
 
     server.start(wait = true)

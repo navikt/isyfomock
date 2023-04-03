@@ -13,7 +13,7 @@ class MotebehovService(
     private val motebehovUrl: String,
     private val pdlClient: PdlClient,
     private val httpClient: HttpClient = httpClientDefault(),
-    private val logger: Logger = LoggerFactory.getLogger(MotebehovService::class.java)
+    private val logger: Logger = LoggerFactory.getLogger(MotebehovService::class.java),
 ) {
     suspend fun deleteMotebehov(fnr: String): String {
         val aktorId = pdlClient.fetchPdlAktorIdFraFnr(fnr)?.first()?.ident ?: throw IllegalArgumentException()

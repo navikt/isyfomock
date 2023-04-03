@@ -29,7 +29,7 @@ class AzureAdV2Client(
                     append("client_secret", aadAppSecret)
                     append("grant_type", "client_credentials")
                     append("scope", "api://$scopeClientId/.default")
-                }
+                },
             )
 
             azureAdTokenResponse?.let { token ->
@@ -59,11 +59,11 @@ class AzureAdV2Client(
     }
 
     private fun handleUnexpectedResponseException(
-        responseException: ResponseException
+        responseException: ResponseException,
     ): AzureAdV2TokenResponse? {
         log.error(
             "Error while requesting AzureAdAccessToken with statusCode=${responseException.response.status.value}",
-            responseException
+            responseException,
         )
         return null
     }

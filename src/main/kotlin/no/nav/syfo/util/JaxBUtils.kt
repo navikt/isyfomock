@@ -13,8 +13,11 @@ import javax.xml.bind.*
 import javax.xml.transform.stream.StreamResult
 
 val fellesformatJaxBContext: JAXBContext = JAXBContext.newInstance(
-    XMLEIFellesformat::class.java, XMLMsgHead::class.java,
-    XMLMottakenhetBlokk::class.java, XMLDialogmelding::class.java, XMLBase64Container::class.java
+    XMLEIFellesformat::class.java,
+    XMLMsgHead::class.java,
+    XMLMottakenhetBlokk::class.java,
+    XMLDialogmelding::class.java,
+    XMLBase64Container::class.java,
 )
 
 val fellesformatUnmarshaller: Unmarshaller = fellesformatJaxBContext.createUnmarshaller().apply {
