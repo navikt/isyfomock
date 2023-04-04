@@ -90,6 +90,10 @@ swaggerSources {
     }
 }
 
+kotlin {
+    jvmToolchain(17)
+}
+
 tasks {
     withType<Jar> {
         manifest.attributes["Main-Class"] = "no.nav.syfo.ApplicationKt"
@@ -99,10 +103,6 @@ tasks {
         doLast {
             println(project.version)
         }
-    }
-
-    withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-        kotlinOptions.jvmTarget = "17"
     }
 
     withType<org.hidetake.gradle.swagger.generator.GenerateSwaggerUI> {
