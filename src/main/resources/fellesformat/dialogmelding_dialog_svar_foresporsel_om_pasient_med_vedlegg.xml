@@ -7,6 +7,10 @@
             <GenDate>2020-09-30T18:00:31.4764563+02:00</GenDate>
             <MsgId>b62016eb-6c2d-417a-8ecc-157b3c5ee2ca</MsgId>
             <Ack DN="Ja" V="J"/>
+            <ConversationRef>
+                <RefToParent>47822e21-0151-4fb1-a223-99f0aba5d51b</RefToParent>
+                <RefToConversation>47822e21-0151-4fb1-a223-99f0aba5d51b</RefToConversation>
+            </ConversationRef>
             <Sender>
                 <Organisation>
                     <OrganisationName>Kule helsetjenester AS</OrganisationName>
