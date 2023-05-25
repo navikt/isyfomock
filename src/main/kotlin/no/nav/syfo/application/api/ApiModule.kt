@@ -13,6 +13,8 @@ import no.nav.syfo.aktor.AktorService
 import no.nav.syfo.aktor.registerAktorApi
 import no.nav.syfo.application.ApplicationState
 import no.nav.syfo.application.metric.registerMetricApi
+import no.nav.syfo.apprec.ApprecService
+import no.nav.syfo.apprec.api.registerApprecApi
 import no.nav.syfo.client.azuread.AzureAdV2Client
 import no.nav.syfo.client.pdl.PdlClient
 import no.nav.syfo.configureJacksonMapper
@@ -27,6 +29,7 @@ import no.nav.syfo.oppfolgingsplan.registerOppfolgingsplanApi
 fun Application.apiModule(
     applicationState: ApplicationState,
     mqSender: MQSender,
+    apprecMQSender: MQSender,
     environment: Environment,
 ) {
     install(ContentNegotiation) {
@@ -68,6 +71,7 @@ fun Application.apiModule(
     )
 
     val dialogmeldingService = DialogmeldingService(mqSender = mqSender)
+    val apprecService = ApprecService(mqSender = apprecMQSender)
     val motebehovService = MotebehovService(motebehovUrl = environment.motebehovUrl, pdlClient = pdlClient)
     val aktorService = AktorService(pdlClient = pdlClient)
     val oppfolgingsplanService = OppfolgingsplanService(oppfolgingsplanUrl = environment.oppfolgingsplanUrl)
@@ -77,6 +81,7 @@ fun Application.apiModule(
         registerMetricApi()
         registerSwaggerDocApi()
         registerDialogmeldingApi(dialogmeldingService = dialogmeldingService)
+        registerApprecApi(apprecService = apprecService)
         registerMotebehovApi(motebehovService = motebehovService)
         registerAktorApi(aktorService = aktorService)
         registerOppfolgingsplanApi(oppfolgingsplanService = oppfolgingsplanService)

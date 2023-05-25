@@ -26,7 +26,7 @@ class MQSender(
 
     fun send(payload: String) {
         jmsContext.createContext(AUTO_ACKNOWLEDGE).use { context ->
-            val destination = context.createQueue("queue:///${environmentMQ.padm2Queuename}")
+            val destination = context.createQueue("queue:///${environmentMQ.mqQueuename}")
             val message = context.createTextMessage(payload)
             context.createProducer().send(destination, message)
         }
