@@ -11,7 +11,15 @@ data class Environment(
         mqApplicationName = "isyfomock",
         mqPort = getEnvVar("MQGATEWAY_PORT", "1413").toInt(),
         mqChannelName = getEnvVar("MQGATEWAY_CHANNEL_NAME"),
-        padm2Queuename = getEnvVar("PADM2_QUEUENAME"),
+        mqQueuename = getEnvVar("PADM2_QUEUENAME"),
+    ),
+    val apprecMQ: EnvironmentMQ = EnvironmentMQ(
+        mqQueueManager = getEnvVar("APPREC_MQGATEWAY_NAME"),
+        mqHostname = getEnvVar("APPREC_MQGATEWAY_HOSTNAME"),
+        mqApplicationName = "isyfomock",
+        mqPort = getEnvVar("APPREC_MQGATEWAY_PORT", "1413").toInt(),
+        mqChannelName = getEnvVar("APPREC_MQGATEWAY_CHANNEL_NAME"),
+        mqQueuename = getEnvVar("APPREC_QUEUENAME"),
     ),
     val pdlUrl: String = getEnvVar("PDL_URL"),
     val pdlClientId: String = getEnvVar("PDL_CLIENT_ID"),
@@ -25,7 +33,7 @@ data class EnvironmentMQ(
     val mqApplicationName: String,
     val mqPort: Int,
     val mqChannelName: String,
-    val padm2Queuename: String,
+    val mqQueuename: String,
 )
 
 data class ServiceUser(

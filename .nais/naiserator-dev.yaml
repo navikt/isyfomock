@@ -59,6 +59,16 @@ spec:
       value: Q1_ISYFOMOCK
     - name: PADM2_QUEUENAME
       value: QA.Q1_PADM.INPUT
+    - name: APPREC_MQGATEWAY_NAME
+      value: MQLS03
+    - name: APPREC_MQGATEWAY_HOSTNAME
+      value: b27apvl221.preprod.local
+    - name: APPREC_MQGATEWAY_CHANNEL_NAME
+      value: Q1_ISYFOMOCK
+    - name: APPREC_MQGATEWAY_PORT
+      value: '1413'
+    - name: APPREC_QUEUENAME
+      value: QA.Q1_ISDIALOGMELDING.IU03_UTSENDING_REPLY
     - name: PDL_CLIENT_ID
       value: "dev-fss.pdl.pdl-api"
     - name: PDL_URL

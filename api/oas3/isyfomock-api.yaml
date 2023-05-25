@@ -27,6 +27,26 @@ paths:
         '500':
           description: Internal server error
 
+  /apprec/opprett:
+    post:
+      operationId: opprettApprec
+      tags:
+        - Apprec
+      summary: Oppretter apprec for en dialogmelding
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OpprettApprecRequest'
+      responses:
+        '200':
+          description: Ok
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal server error
+
   /aktor/hentAktorIdByFnr/{fnr}:
     get:
       tags:
@@ -151,3 +171,27 @@ components:
         - pasientFnr
         - legeFnr
         - partnerId
+
+    OpprettApprecRequest:
+      type: object
+      properties:
+        status:
+          type: string
+          description: status
+          enum:
+            - OK
+            - AVVIST
+        errorCode:
+          type: string
+          description: errorCode
+          example: E21
+        errorText:
+          type: string
+          description: errorText
+          example: Mottaker finnes ikke
+        msgId:
+          type: string
+          description: msgId for sendt dialogmelding, må være gyldig uuid
+      required:
+        - status
+        - msgId

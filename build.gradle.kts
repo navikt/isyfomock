@@ -3,6 +3,7 @@ version = "0.0.1"
 
 object Versions {
     const val jaxb = "2.3.1"
+    const val kithApprecVersion = "2019.07.30-04-23-2a0d1388209441ec05d2e92a821eed4f796a3ae2"
     const val ktor = "2.0.3"
     const val kluent = "1.68"
     const val mockk = "1.12.4"
@@ -18,9 +19,9 @@ object Versions {
 }
 
 plugins {
-    kotlin("jvm") version "1.8.20"
+    kotlin("jvm") version "1.8.21"
     id("com.github.johnrengelman.shadow") version "8.1.1"
-    id("org.jlleitschuh.gradle.ktlint") version "11.3.1"
+    id("org.jlleitschuh.gradle.ktlint") version "11.3.2"
     id("org.hidetake.swagger.generator") version "2.19.2" apply true
 }
 
@@ -70,6 +71,7 @@ dependencies {
     implementation("no.nav.syfotjenester:kith-base64:${Versions.syfotjenester}")
     implementation("no.nav.syfotjenester:kith-dialogmelding:${Versions.syfotjenester}")
     implementation("no.nav.syfotjenester:kith-hodemelding:${Versions.syfotjenester}")
+    implementation("no.nav.helse.xml:kith-apprec:${Versions.kithApprecVersion}")
 
     swaggerUI("org.webjars:swagger-ui:${Versions.swaggerUi}")
 

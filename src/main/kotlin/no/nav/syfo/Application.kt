@@ -22,6 +22,11 @@ fun main() {
         serviceUser = serviceUser,
     )
 
+    val apprecMqSender = MQSender(
+        environmentMQ = environment.apprecMQ,
+        serviceUser = serviceUser,
+    )
+
     val applicationEngineEnvironment = applicationEngineEnvironment {
         connector {
             port = environment.applicationPort
@@ -29,6 +34,7 @@ fun main() {
         module {
             apiModule(
                 mqSender = mqSender,
+                apprecMQSender = apprecMqSender,
                 applicationState = applicationState,
                 environment = environment,
             )

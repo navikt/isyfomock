@@ -9,6 +9,12 @@ import no.nav.syfo.mq.MQSender
 fun Application.testApiModule(
     applicationState: ApplicationState = ApplicationState(alive = true, ready = true),
     mqSender: MQSender = mockk(),
+    apprecMQSender: MQSender = mockk(),
 ) {
-    this.apiModule(applicationState = applicationState, mqSender = mqSender, environment = testEnvironment())
+    this.apiModule(
+        applicationState = applicationState,
+        mqSender = mqSender,
+        apprecMQSender = apprecMQSender,
+        environment = testEnvironment(),
+    )
 }
