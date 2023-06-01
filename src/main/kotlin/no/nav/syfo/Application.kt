@@ -5,7 +5,10 @@ import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import no.nav.syfo.application.ApplicationState
 import no.nav.syfo.application.api.apiModule
+import no.nav.syfo.esyfovarsel.kafka.kafkaEsyfovarselHendelseProducerConfig
+import no.nav.syfo.esyfovarsel.model.EsyfovarselHendelse
 import no.nav.syfo.mq.MQSender
+import org.apache.kafka.clients.producer.KafkaProducer
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.util.concurrent.TimeUnit
@@ -27,6 +30,12 @@ fun main() {
         serviceUser = serviceUser,
     )
 
+    val esyfovarselHendelseProducer = KafkaProducer<String, EsyfovarselHendelse>(
+        kafkaEsyfovarselHendelseProducerConfig(
+            kafkaEnvironment = environment.kafka,
+        ),
+    )
+
     val applicationEngineEnvironment = applicationEngineEnvironment {
         connector {
             port = environment.applicationPort
@@ -37,6 +46,7 @@ fun main() {
                 apprecMQSender = apprecMqSender,
                 applicationState = applicationState,
                 environment = environment,
+                esyfovarselHendelseProducer = esyfovarselHendelseProducer,
             )
         }
     }

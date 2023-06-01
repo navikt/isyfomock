@@ -20,17 +20,22 @@ import no.nav.syfo.client.pdl.PdlClient
 import no.nav.syfo.configureJacksonMapper
 import no.nav.syfo.dialogmelding.DialogmeldingService
 import no.nav.syfo.dialogmelding.api.registerDialogmeldingApi
+import no.nav.syfo.esyfovarsel.api.registerEsyfovarselApi
+import no.nav.syfo.esyfovarsel.model.EsyfovarselHendelse
 import no.nav.syfo.motebehov.MotebehovService
 import no.nav.syfo.motebehov.api.registerMotebehovApi
 import no.nav.syfo.mq.MQSender
 import no.nav.syfo.oppfolgingsplan.OppfolgingsplanService
 import no.nav.syfo.oppfolgingsplan.registerOppfolgingsplanApi
+import no.nav.syfo.esyfovarsel.EsyfovarselProducer
+import org.apache.kafka.clients.producer.KafkaProducer
 
 fun Application.apiModule(
     applicationState: ApplicationState,
     mqSender: MQSender,
     apprecMQSender: MQSender,
     environment: Environment,
+    esyfovarselHendelseProducer: KafkaProducer<String, EsyfovarselHendelse>,
 ) {
     install(ContentNegotiation) {
         jackson(block = configureJacksonMapper())
@@ -75,6 +80,7 @@ fun Application.apiModule(
     val motebehovService = MotebehovService(motebehovUrl = environment.motebehovUrl, pdlClient = pdlClient)
     val aktorService = AktorService(pdlClient = pdlClient)
     val oppfolgingsplanService = OppfolgingsplanService(oppfolgingsplanUrl = environment.oppfolgingsplanUrl)
+    val esyfovarselProducer = EsyfovarselProducer(kafkaProducer = esyfovarselHendelseProducer)
 
     routing {
         registerPodApi(applicationState = applicationState)
@@ -85,5 +91,6 @@ fun Application.apiModule(
         registerMotebehovApi(motebehovService = motebehovService)
         registerAktorApi(aktorService = aktorService)
         registerOppfolgingsplanApi(oppfolgingsplanService = oppfolgingsplanService)
+        registerEsyfovarselApi(esyfovarselProducer = esyfovarselProducer)
     }
 }

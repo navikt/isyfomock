@@ -1,5 +1,7 @@
 package no.nav.syfo
 
+import no.nav.syfo.kafka.KafkaEnvironment
+
 data class Environment(
     val applicationPort: Int = getEnvVar("APPLICATION_PORT", "8080").toInt(),
     val aadAppClient: String = getEnvVar("AZURE_APP_CLIENT_ID"),
@@ -25,6 +27,16 @@ data class Environment(
     val pdlClientId: String = getEnvVar("PDL_CLIENT_ID"),
     val motebehovUrl: String = getEnvVar("MOTEBEHOV_URL"),
     val oppfolgingsplanUrl: String = getEnvVar("OPPFOLGINGSPLAN_URL"),
+    val kafka: KafkaEnvironment = KafkaEnvironment(
+        aivenBootstrapServers = getEnvVar("KAFKA_BROKERS"),
+        aivenCredstorePassword = getEnvVar("KAFKA_CREDSTORE_PASSWORD"),
+        aivenKeystoreLocation = getEnvVar("KAFKA_KEYSTORE_PATH"),
+        aivenSecurityProtocol = "SSL",
+        aivenTruststoreLocation = getEnvVar("KAFKA_TRUSTSTORE_PATH"),
+        aivenSchemaRegistryUrl = getEnvVar("KAFKA_SCHEMA_REGISTRY"),
+        aivenRegistryUser = getEnvVar("KAFKA_SCHEMA_REGISTRY_USER"),
+        aivenRegistryPassword = getEnvVar("KAFKA_SCHEMA_REGISTRY_PASSWORD"),
+    ),
 )
 
 data class EnvironmentMQ(
