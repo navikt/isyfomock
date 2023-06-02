@@ -36,10 +36,10 @@ fun Route.registerEsyfovarselApi(
         val esyfovarselHendelse = NarmesteLederHendelse(
             type = HendelseType.valueOf(formParameters.getOrFail(EsyfovarselNarmesteLederRequestParameters.type)),
             ferdigstill = formParameters[EsyfovarselNarmesteLederRequestParameters.ferdigstill].toBoolean(),
-            data = EsyfovarselNarmesteLederRequestParameters.data,
-            narmesteLederFnr = EsyfovarselNarmesteLederRequestParameters.narmesteLederFnr,
-            arbeidstakerFnr = EsyfovarselNarmesteLederRequestParameters.arbeidstakerFnr,
-            orgnummer = EsyfovarselNarmesteLederRequestParameters.orgnummer,
+            data = formParameters[EsyfovarselNarmesteLederRequestParameters.data],
+            narmesteLederFnr = formParameters.getOrFail(EsyfovarselNarmesteLederRequestParameters.narmesteLederFnr),
+            arbeidstakerFnr = formParameters.getOrFail(EsyfovarselNarmesteLederRequestParameters.arbeidstakerFnr),
+            orgnummer = formParameters.getOrFail(EsyfovarselNarmesteLederRequestParameters.orgnummer),
         )
 
         call.respond(HttpStatusCode.OK, esyfovarselProducer.sendVarselTilEsyfovarsel(esyfovarselHendelse))
@@ -50,9 +50,9 @@ fun Route.registerEsyfovarselApi(
         val esyfovarselHendelse = ArbeidstakerHendelse(
             type = HendelseType.valueOf(formParameters.getOrFail(EsyfovarselArbeidstakerRequestParameters.type)),
             ferdigstill = formParameters[EsyfovarselArbeidstakerRequestParameters.ferdigstill].toBoolean(),
-            data = EsyfovarselArbeidstakerRequestParameters.data,
-            arbeidstakerFnr = EsyfovarselArbeidstakerRequestParameters.arbeidstakerFnr,
-            orgnummer = EsyfovarselArbeidstakerRequestParameters.orgnummer,
+            data = formParameters[EsyfovarselArbeidstakerRequestParameters.data],
+            arbeidstakerFnr = formParameters.getOrFail(EsyfovarselArbeidstakerRequestParameters.arbeidstakerFnr),
+            orgnummer = formParameters[EsyfovarselArbeidstakerRequestParameters.orgnummer],
         )
 
         call.respond(HttpStatusCode.OK, esyfovarselProducer.sendVarselTilEsyfovarsel(esyfovarselHendelse))
