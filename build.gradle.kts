@@ -16,6 +16,7 @@ object Versions {
     const val spek = "2.0.18"
     const val syfotjenester = "1.2021.06.09-13.09-b3d30de9996e"
     const val swaggerUi = "4.9.1"
+    const val kafka = "3.3.2"
 }
 
 plugins {
@@ -72,6 +73,12 @@ dependencies {
     implementation("no.nav.syfotjenester:kith-dialogmelding:${Versions.syfotjenester}")
     implementation("no.nav.syfotjenester:kith-hodemelding:${Versions.syfotjenester}")
     implementation("no.nav.helse.xml:kith-apprec:${Versions.kithApprecVersion}")
+
+    // Kafka
+    val excludeLog4j = fun ExternalModuleDependency.() {
+        exclude(group = "log4j")
+    }
+    implementation("org.apache.kafka:kafka_2.13:${Versions.kafka}", excludeLog4j)
 
     swaggerUI("org.webjars:swagger-ui:${Versions.swaggerUi}")
 

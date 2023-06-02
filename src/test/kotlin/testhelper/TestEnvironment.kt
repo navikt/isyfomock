@@ -2,6 +2,8 @@ package testhelper
 
 import no.nav.syfo.Environment
 import no.nav.syfo.EnvironmentMQ
+import no.nav.syfo.kafka.KafkaEnvironment
+
 fun testEnvironment(
     azureTokenEndpoint: String = "azureTokenEndpoint",
     pdlUrl: String? = null,
@@ -29,4 +31,14 @@ fun testEnvironment(
     pdlUrl = pdlUrl ?: "http://pdl",
     motebehovUrl = "moetebehovUrl",
     oppfolgingsplanUrl = "oppfolgingsplanUrl",
+    kafka = KafkaEnvironment(
+        aivenBootstrapServers = "fddfgdf",
+        aivenCredstorePassword = "credstorepassord",
+        aivenKeystoreLocation = "keystore",
+        aivenSecurityProtocol = "SSL",
+        aivenTruststoreLocation = "truststore",
+        aivenSchemaRegistryUrl = "http://kafka-schema-registry.tpa.svc.nais.local:8081",
+        aivenRegistryUser = "registryuser",
+        aivenRegistryPassword = "registrypassword",
+    ),
 )
