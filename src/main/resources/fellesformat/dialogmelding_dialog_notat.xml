@@ -10,7 +10,7 @@
             <Ack DN="Ja" V="J" />
             <Sender>
                 <Organisation>
-                    <OrganisationName>Dr Gilbert &amp; gjengen</OrganisationName>
+                    <OrganisationName>Dr — Gilbert &amp; gjengen</OrganisationName>
                     <Ident>
                         <Id>223456789</Id>
                         <TypeId DN="Organisasjonsnummeret i Enhetsregister (Brønnøysund)" S="1.16.578.1.12.3.1.1.9051" V="ENH" />
