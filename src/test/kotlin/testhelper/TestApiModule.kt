@@ -13,6 +13,7 @@ fun Application.testApiModule(
     mqSender: MQSender = mockk(),
     apprecMQSender: MQSender = mockk(),
     esyfovarselHendelseProducer: KafkaProducer<String, EsyfovarselHendelse> = mockk(),
+    testdataResetProducer: KafkaProducer<String, String> = mockk(),
 ) {
     this.apiModule(
         applicationState = applicationState,
@@ -20,5 +21,6 @@ fun Application.testApiModule(
         apprecMQSender = apprecMQSender,
         environment = testEnvironment(),
         esyfovarselHendelseProducer = esyfovarselHendelseProducer,
+        testdataResetKafkaProducer = testdataResetProducer,
     )
 }
