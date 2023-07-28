@@ -16,7 +16,7 @@ spec:
     retentionHours: 72
   acl:
     - team: team-esyfo
-      application: esyfovarsel
+      application: syfomotebehov
       access: read
     - team: teamsykefravr
       application: isyfomock
