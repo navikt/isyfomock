@@ -2,8 +2,8 @@ name: 'Deploy topic'
 on:
   push:
     paths:
-      - nais/topics/**
-      - .github/workflows/topic.yml
+      - .nais/topics/**
+      - .github/workflows/topic.yaml
 jobs:
   deploy-topic-til-dev:
     if: github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/heads/dev-')
