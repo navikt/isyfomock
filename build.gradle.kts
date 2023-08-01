@@ -4,25 +4,25 @@ version = "0.0.1"
 object Versions {
     const val jaxb = "2.3.1"
     const val kithApprecVersion = "2019.07.30-04-23-2a0d1388209441ec05d2e92a821eed4f796a3ae2"
-    const val ktor = "2.0.3"
-    const val kluent = "1.68"
-    const val mockk = "1.12.4"
-    const val jackson = "2.13.3"
+    const val ktor = "2.3.2"
+    const val kluent = "1.73"
+    const val mockk = "1.13.5"
+    const val jacksonDataType = "2.15.2"
     const val javaTimeAdapter = "1.1.3"
-    const val logback = "1.2.11"
-    const val logstashEncoder = "7.2"
-    const val micrometerRegistry = "1.9.2"
-    const val mq = "9.2.5.0"
-    const val spek = "2.0.18"
+    const val logback = "1.4.7"
+    const val logstashEncoder = "7.3"
+    const val micrometerRegistry = "1.11.2"
+    const val mq = "9.3.3.0"
+    const val spek = "2.0.19"
     const val syfotjenester = "1.2021.06.09-13.09-b3d30de9996e"
-    const val swaggerUi = "4.9.1"
-    const val kafka = "3.3.2"
+    const val swaggerUi = "5.1.3"
+    const val kafka = "3.5.1"
 }
 
 plugins {
-    kotlin("jvm") version "1.8.22"
+    kotlin("jvm") version "1.9.0"
     id("com.github.johnrengelman.shadow") version "8.1.1"
-    id("org.jlleitschuh.gradle.ktlint") version "11.4.0"
+    id("org.jlleitschuh.gradle.ktlint") version "11.4.2"
     id("org.hidetake.swagger.generator") version "2.19.2" apply true
 }
 
@@ -60,7 +60,7 @@ dependencies {
     implementation("io.micrometer:micrometer-registry-prometheus:${Versions.micrometerRegistry}")
 
     // (De-)serialization
-    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${Versions.jackson}")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${Versions.jacksonDataType}")
     implementation("javax.xml.bind:jaxb-api:${Versions.jaxb}")
     implementation("org.glassfish.jaxb:jaxb-runtime:${Versions.jaxb}")
     implementation("com.migesok:jaxb-java-time-adapters:${Versions.javaTimeAdapter}")
