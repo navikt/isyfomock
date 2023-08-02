@@ -172,6 +172,21 @@ paths:
         '500':
           description: Internal server error
 
+  /reset/{fnr}:
+    post:
+      operationId: resetTestdata
+      parameters:
+        - name: fnr
+          in: path
+          description: Fødselsnummer
+          required: true
+      tags:
+        - Reset testdata
+      summary: Sender en kafkamelding til reset-topic. Apper som leser reset-topic sletter testdata knyttet til brukeren.
+      responses:
+        "200":
+          description: Successful operation
+
 components:
   schemas:
     OpprettDialogmeldingRequest:

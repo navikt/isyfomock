@@ -8,6 +8,7 @@ import no.nav.syfo.application.api.apiModule
 import no.nav.syfo.esyfovarsel.kafka.kafkaEsyfovarselHendelseProducerConfig
 import no.nav.syfo.esyfovarsel.model.EsyfovarselHendelse
 import no.nav.syfo.mq.MQSender
+import no.nav.syfo.reset.kafka.kafkaTestdataResetHendelseProducerConfig
 import org.apache.kafka.clients.producer.KafkaProducer
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -36,6 +37,12 @@ fun main() {
         ),
     )
 
+    val testdataResetProducer = KafkaProducer<String, String>(
+        kafkaTestdataResetHendelseProducerConfig(
+            kafkaEnvironment = environment.kafka,
+        ),
+    )
+
     val applicationEngineEnvironment = applicationEngineEnvironment {
         connector {
             port = environment.applicationPort
@@ -47,6 +54,7 @@ fun main() {
                 applicationState = applicationState,
                 environment = environment,
                 esyfovarselHendelseProducer = esyfovarselHendelseProducer,
+                testdataResetKafkaProducer = testdataResetProducer,
             )
         }
     }

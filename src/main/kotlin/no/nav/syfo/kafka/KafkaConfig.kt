@@ -1,8 +1,10 @@
 package no.nav.syfo.kafka
 
 import org.apache.kafka.clients.CommonClientConfigs
+import org.apache.kafka.clients.producer.ProducerConfig
 import org.apache.kafka.common.config.SaslConfigs
 import org.apache.kafka.common.config.SslConfigs
+import org.apache.kafka.common.serialization.StringSerializer
 import java.util.*
 
 fun commonKafkaAivenConfig(
@@ -19,4 +21,16 @@ fun commonKafkaAivenConfig(
     this[SslConfigs.SSL_KEYSTORE_LOCATION_CONFIG] = kafkaEnvironment.aivenKeystoreLocation
     this[SslConfigs.SSL_KEYSTORE_PASSWORD_CONFIG] = kafkaEnvironment.aivenCredstorePassword
     this[SslConfigs.SSL_KEY_PASSWORD_CONFIG] = kafkaEnvironment.aivenCredstorePassword
+}
+
+fun commonKafkaAivenProducerConfig(
+    kafkaEnvironment: KafkaEnvironment,
+) = Properties().apply {
+    putAll(commonKafkaAivenConfig(kafkaEnvironment))
+    this[ProducerConfig.ACKS_CONFIG] = "all"
+    this[ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG] = "true"
+    this[ProducerConfig.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION] = "1"
+    this[ProducerConfig.MAX_BLOCK_MS_CONFIG] = "15000"
+    this[ProducerConfig.RETRIES_CONFIG] = "100000"
+    this[ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG] = StringSerializer::class.java.canonicalName
 }
