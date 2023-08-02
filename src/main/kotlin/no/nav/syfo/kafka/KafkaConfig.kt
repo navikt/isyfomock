@@ -1,6 +1,5 @@
 package no.nav.syfo.kafka
 
-import no.nav.syfo.esyfovarsel.kafka.KafkaEsyfovarselHendelseSerializer
 import org.apache.kafka.clients.CommonClientConfigs
 import org.apache.kafka.clients.producer.ProducerConfig
 import org.apache.kafka.common.config.SaslConfigs
@@ -34,5 +33,4 @@ fun commonKafkaAivenProducerConfig(
     this[ProducerConfig.MAX_BLOCK_MS_CONFIG] = "15000"
     this[ProducerConfig.RETRIES_CONFIG] = "100000"
     this[ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG] = StringSerializer::class.java.canonicalName
-    this[ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG] = KafkaEsyfovarselHendelseSerializer::class.java.canonicalName
 }

@@ -1,6 +1,7 @@
 package no.nav.syfo.reset
 
 import no.nav.syfo.esyfovarsel.EsyfovarselProducer
+import no.nav.syfo.model.PersonIdent
 import org.apache.kafka.clients.producer.KafkaProducer
 import org.apache.kafka.clients.producer.ProducerRecord
 import org.slf4j.LoggerFactory
@@ -10,15 +11,15 @@ class TestdataResetProducer(
     private val kafkaProducer: KafkaProducer<String, String>,
 ) {
     fun resetTestdata(
-        fnr: String,
+        ident: PersonIdent,
     ) {
         try {
-            log.info("TestdataResetProducer:Resetter testdata for $fnr")
+            log.info("TestdataResetProducer:Resetter testdata for $ident")
             kafkaProducer.send(
                 ProducerRecord(
                     TESTDATA_RESET_TOPIC,
                     UUID.randomUUID().toString(),
-                    fnr,
+                    ident.value,
                 ),
             ).get()
         } catch (e: Exception) {
