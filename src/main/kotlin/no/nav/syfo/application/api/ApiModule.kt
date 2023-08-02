@@ -1,13 +1,13 @@
 package no.nav.syfo.application.api
 
-import io.ktor.server.application.*
 import io.ktor.client.plugins.*
 import io.ktor.http.*
 import io.ktor.serialization.jackson.*
-import io.ktor.server.routing.*
+import io.ktor.server.application.*
 import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.server.plugins.statuspages.*
 import io.ktor.server.response.*
+import io.ktor.server.routing.*
 import no.nav.syfo.Environment
 import no.nav.syfo.aktor.AktorService
 import no.nav.syfo.aktor.registerAktorApi
@@ -20,16 +20,16 @@ import no.nav.syfo.client.pdl.PdlClient
 import no.nav.syfo.configureJacksonMapper
 import no.nav.syfo.dialogmelding.DialogmeldingService
 import no.nav.syfo.dialogmelding.api.registerDialogmeldingApi
-import no.nav.syfo.esyfovarsel.api.registerTestdataResetApi
+import no.nav.syfo.esyfovarsel.EsyfovarselProducer
+import no.nav.syfo.esyfovarsel.api.registerEsyfovarselApi
 import no.nav.syfo.esyfovarsel.model.EsyfovarselHendelse
 import no.nav.syfo.motebehov.MotebehovService
 import no.nav.syfo.motebehov.api.registerMotebehovApi
 import no.nav.syfo.mq.MQSender
 import no.nav.syfo.oppfolgingsplan.OppfolgingsplanService
 import no.nav.syfo.oppfolgingsplan.registerOppfolgingsplanApi
-import no.nav.syfo.esyfovarsel.EsyfovarselProducer
-import no.nav.syfo.esyfovarsel.api.registerEsyfovarselApi
 import no.nav.syfo.reset.TestdataResetProducer
+import no.nav.syfo.reset.api.registerTestdataResetApi
 import org.apache.kafka.clients.producer.KafkaProducer
 
 fun Application.apiModule(

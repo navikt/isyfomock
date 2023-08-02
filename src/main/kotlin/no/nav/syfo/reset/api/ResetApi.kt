@@ -1,4 +1,4 @@
-package no.nav.syfo.esyfovarsel.api
+package no.nav.syfo.reset.api
 
 import io.ktor.http.*
 import io.ktor.server.application.*
