@@ -18,6 +18,18 @@ spec:
     - team: team-esyfo
       application: syfomotebehov
       access: read
+    - team: team-esyfo
+      application: esyfovarsel
+      access: read
+    - team: teamsykefravr
+      application: isdialogmote
+      access: read
+    - team: teamsykefravr
+      application: isdialogmotekandidat
+      access: read
+    - team: teamsykefravr
+      application: isoppfolgingstilfelle
+      access: read
     - team: teamsykefravr
       application: isyfomock
       access: write
