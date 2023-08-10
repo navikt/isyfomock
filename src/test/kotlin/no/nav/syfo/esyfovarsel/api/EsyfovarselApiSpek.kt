@@ -20,6 +20,9 @@ class EsyfovarselApiSpek : Spek({
         EsyfovarselNarmesteLederRequestParameters.narmesteLederFnr to "123",
         EsyfovarselNarmesteLederRequestParameters.arbeidstakerFnr to "321",
         EsyfovarselNarmesteLederRequestParameters.orgnummer to "123456789",
+        EsyfovarselNarmesteLederRequestParameters.data to "{\n" +
+            "  \"tilbakemelding\": \"Vi har vurdert at det ikke trengs møte akkurat nå\"\n" +
+            "}",
     )
 
     val arbeidstakerRequestParams = arrayOf(

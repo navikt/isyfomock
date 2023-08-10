@@ -268,8 +268,10 @@ components:
           type: boolean
           description: settes til true når varsel skal ferdigstilles
         data:
-          type: string
+          type: object
           description: ekstra data som noen varseltyper krever
+          example:
+            tilbakemelding: Vi har vurdert at det ikke trengs møte akkurat nå
         narmesteLederFnr:
           type: string
           description: fødselsnummer til nærmeste leder som skal varsles
@@ -304,8 +306,10 @@ components:
           type: boolean
           description: settes til true når varsel skal ferdigstilles
         data:
-          type: string
+          type: object
           description: ekstra data som noen varseltyper krever
+          example:
+            tilbakemelding: Vi har vurdert at det ikke trengs møte akkurat nå
         arbeidstakerFnr:
           type: string
           description: fødselsnummer til arbeidstakeren varselet gjelder for

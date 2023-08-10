@@ -1,4 +1,5 @@
 package no.nav.syfo.esyfovarsel
+
 import no.nav.syfo.esyfovarsel.model.EsyfovarselHendelse
 import org.apache.kafka.clients.producer.KafkaProducer
 import org.apache.kafka.clients.producer.ProducerRecord
