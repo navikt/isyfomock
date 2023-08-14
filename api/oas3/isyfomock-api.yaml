@@ -259,6 +259,7 @@ components:
           enum:
             - NL_OPPFOLGINGSPLAN_SENDT_TIL_GODKJENNING
             - NL_DIALOGMOTE_SVAR_MOTEBEHOV
+            - NL_DIALOGMOTE_MOTEBEHOV_TILBAKEMELDING
             - NL_DIALOGMOTE_INNKALT
             - NL_DIALOGMOTE_AVLYST
             - NL_DIALOGMOTE_REFERAT
@@ -267,8 +268,10 @@ components:
           type: boolean
           description: settes til true når varsel skal ferdigstilles
         data:
-          type: string
+          type: object
           description: ekstra data som noen varseltyper krever
+          example:
+            tilbakemelding: Vi har vurdert at det ikke trengs møte akkurat nå
         narmesteLederFnr:
           type: string
           description: fødselsnummer til nærmeste leder som skal varsles
@@ -292,6 +295,7 @@ components:
           enum:
             - SM_OPPFOLGINGSPLAN_SENDT_TIL_GODKJENNING
             - SM_DIALOGMOTE_SVAR_MOTEBEHOV
+            - SM_DIALOGMOTE_MOTEBEHOV_TILBAKEMELDING
             - SM_MER_VEILEDNING
             - SM_DIALOGMOTE_INNKALT
             - SM_DIALOGMOTE_AVLYST
@@ -302,8 +306,10 @@ components:
           type: boolean
           description: settes til true når varsel skal ferdigstilles
         data:
-          type: string
+          type: object
           description: ekstra data som noen varseltyper krever
+          example:
+            tilbakemelding: Vi har vurdert at det ikke trengs møte akkurat nå
         arbeidstakerFnr:
           type: string
           description: fødselsnummer til arbeidstakeren varselet gjelder for

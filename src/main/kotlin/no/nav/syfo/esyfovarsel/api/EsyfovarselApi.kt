@@ -1,15 +1,16 @@
 package no.nav.syfo.esyfovarsel.api
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.util.*
+import no.nav.syfo.esyfovarsel.EsyfovarselProducer
 import no.nav.syfo.esyfovarsel.model.ArbeidstakerHendelse
 import no.nav.syfo.esyfovarsel.model.HendelseType
 import no.nav.syfo.esyfovarsel.model.NarmesteLederHendelse
-import no.nav.syfo.esyfovarsel.EsyfovarselProducer
 
 object EsyfovarselNarmesteLederRequestParameters {
     const val type = "type"
@@ -32,11 +33,13 @@ fun Route.registerEsyfovarselApi(
     esyfovarselProducer: EsyfovarselProducer,
 ) {
     post("/esyfovarsel/arbeidsgiver/send") {
+        val mapper = ObjectMapper()
         val formParameters = call.receiveParameters()
+        val data = formParameters[EsyfovarselNarmesteLederRequestParameters.data]
         val esyfovarselHendelse = NarmesteLederHendelse(
             type = HendelseType.valueOf(formParameters.getOrFail(EsyfovarselNarmesteLederRequestParameters.type)),
             ferdigstill = formParameters[EsyfovarselNarmesteLederRequestParameters.ferdigstill].toBoolean(),
-            data = formParameters[EsyfovarselNarmesteLederRequestParameters.data],
+            data = if (data != null) mapper.readTree(data) else null,
             narmesteLederFnr = formParameters.getOrFail(EsyfovarselNarmesteLederRequestParameters.narmesteLederFnr),
             arbeidstakerFnr = formParameters.getOrFail(EsyfovarselNarmesteLederRequestParameters.arbeidstakerFnr),
             orgnummer = formParameters.getOrFail(EsyfovarselNarmesteLederRequestParameters.orgnummer),
@@ -46,11 +49,13 @@ fun Route.registerEsyfovarselApi(
     }
 
     post("/esyfovarsel/arbeidstaker/send") {
+        val mapper = ObjectMapper()
         val formParameters = call.receiveParameters()
+        val data = formParameters[EsyfovarselNarmesteLederRequestParameters.data]
         val esyfovarselHendelse = ArbeidstakerHendelse(
             type = HendelseType.valueOf(formParameters.getOrFail(EsyfovarselArbeidstakerRequestParameters.type)),
             ferdigstill = formParameters[EsyfovarselArbeidstakerRequestParameters.ferdigstill].toBoolean(),
-            data = formParameters[EsyfovarselArbeidstakerRequestParameters.data],
+            data = if (data != null) mapper.readTree(data) else null,
             arbeidstakerFnr = formParameters.getOrFail(EsyfovarselArbeidstakerRequestParameters.arbeidstakerFnr),
             orgnummer = formParameters[EsyfovarselArbeidstakerRequestParameters.orgnummer],
         )
