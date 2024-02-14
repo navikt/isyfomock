@@ -13,7 +13,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Deploy topic til dev-gcp
-        uses: nais/deploy/actions/deploy@2
+        uses: nais/deploy/actions/deploy@v2
         env:
           CLUSTER: dev-gcp
           RESOURCE: .nais/topics/syfo-testdata-reset-topic.yaml
