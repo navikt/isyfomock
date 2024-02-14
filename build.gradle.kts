@@ -4,14 +4,14 @@ version = "0.0.1"
 object Versions {
     const val jaxb = "2.3.1"
     const val kithApprecVersion = "2019.07.30-04-23-2a0d1388209441ec05d2e92a821eed4f796a3ae2"
-    const val ktor = "2.3.6"
+    const val ktor = "2.3.8"
     const val kluent = "1.73"
-    const val mockk = "1.13.8"
-    const val jacksonDataType = "2.16.0"
+    const val mockk = "1.13.9"
+    const val jacksonDataType = "2.16.1"
     const val javaTimeAdapter = "1.1.3"
     const val logback = "1.4.14"
     const val logstashEncoder = "7.4"
-    const val micrometerRegistry = "1.12.0"
+    const val micrometerRegistry = "1.12.2"
     const val mq = "9.3.3.0"
     const val spek = "2.0.19"
     const val syfotjenester = "1.2021.06.09-13.09-b3d30de9996e"
@@ -20,7 +20,7 @@ object Versions {
 }
 
 plugins {
-    kotlin("jvm") version "1.9.21"
+    kotlin("jvm") version "1.9.22"
     id("com.github.johnrengelman.shadow") version "8.1.1"
     id("org.jlleitschuh.gradle.ktlint") version "11.4.2"
     id("org.hidetake.swagger.generator") version "2.19.2" apply true
