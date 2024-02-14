@@ -61,6 +61,8 @@ jobs:
       image: ${{ steps.docker-build-push.outputs.image }}
 
   deploy-dev:
+    permissions:
+      id-token: "write"
     if: github.ref == 'refs/heads/master'
     name: Deploy to NAIS Dev-gcp
     needs: build
