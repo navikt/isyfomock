@@ -9,6 +9,7 @@ object Versions {
     const val mockk = "1.13.9"
     const val jacksonDataType = "2.16.1"
     const val javaTimeAdapter = "1.1.3"
+    const val json = "20231013"
     const val logback = "1.4.14"
     const val logstashEncoder = "7.4"
     const val micrometerRegistry = "1.12.2"
@@ -16,13 +17,13 @@ object Versions {
     const val spek = "2.0.19"
     const val syfotjenester = "1.2021.06.09-13.09-b3d30de9996e"
     const val swaggerUi = "5.1.3"
-    const val kafka = "3.6.1"
+    const val kafka = "3.7.0"
 }
 
 plugins {
-    kotlin("jvm") version "1.9.22"
+    kotlin("jvm") version "1.9.23"
     id("com.github.johnrengelman.shadow") version "8.1.1"
-    id("org.jlleitschuh.gradle.ktlint") version "11.4.2"
+    id("org.jlleitschuh.gradle.ktlint") version "11.6.1"
     id("org.hidetake.swagger.generator") version "2.19.2" apply true
 }
 
@@ -54,6 +55,7 @@ dependencies {
     // Logging
     implementation("ch.qos.logback:logback-classic:${Versions.logback}")
     implementation("net.logstash.logback:logstash-logback-encoder:${Versions.logstashEncoder}")
+    implementation("org.json:json:${Versions.json}")
 
     // Metrics and Prometheus
     implementation("io.ktor:ktor-server-metrics-micrometer:${Versions.ktor}")
