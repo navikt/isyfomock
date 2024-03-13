@@ -17,7 +17,7 @@ object Versions {
     const val spek = "2.0.19"
     const val syfotjenester = "1.2021.06.09-13.09-b3d30de9996e"
     const val swaggerUi = "5.1.3"
-    const val kafka = "3.6.1"
+    const val kafka = "3.7.0"
 }
 
 plugins {
