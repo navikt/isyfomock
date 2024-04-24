@@ -2,7 +2,7 @@ group = "no.nav.syfo"
 version = "0.0.1"
 
 val jaxbVersion = "2.3.1"
-val kithApprecVersion = "2019.07.30-04-23-2a0d1388209441ec05d2e92a821eed4f796a3ae2"
+val kithApprecVersion = "2019.09.09-08-50-693492ddc1d3f98e70c1638c94dcb95a66036d12"
 val ktorVersion = "2.3.8"
 val kluentVersion = "1.73"
 val mockkVersion = "1.13.9"
