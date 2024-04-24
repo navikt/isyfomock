@@ -15,7 +15,7 @@ val micrometerRegistryVersion = "1.12.2"
 val mqVersion = "9.3.3.0"
 val spekVersion = "2.0.19"
 val syfotjenesterVersion = "1.2021.06.09-13.09-b3d30de9996e"
-val swaggerUiVersion = "5.1.3"
+val swaggerUiVersion = "5.17.0"
 val kafkaVersion = "3.7.0"
 
 plugins {
