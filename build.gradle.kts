@@ -3,7 +3,7 @@ version = "0.0.1"
 
 val jaxbVersion = "2.3.1"
 val kithApprecVersion = "2019.07.30-04-23-2a0d1388209441ec05d2e92a821eed4f796a3ae2"
-val ktorVersion = "2.3.8"
+val ktorVersion = "2.3.10"
 val kluentVersion = "1.73"
 val mockkVersion = "1.13.9"
 val jacksonDataTypeVersion = "2.16.1"
