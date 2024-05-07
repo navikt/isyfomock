@@ -6,7 +6,7 @@ val kithApprecVersion = "2019.09.09-08-50-693492ddc1d3f98e70c1638c94dcb95a66036d
 val ktorVersion = "2.3.10"
 val kluentVersion = "1.73"
 val mockkVersion = "1.13.10"
-val jacksonDataTypeVersion = "2.17.0"
+val jacksonDataTypeVersion = "2.17.1"
 val javaTimeAdapterVersion = "1.1.3"
 val jsonVersion = "20231013"
 val logbackVersion = "1.5.6"
@@ -19,7 +19,7 @@ val swaggerUiVersion = "5.17.2"
 val kafkaVersion = "3.7.0"
 
 plugins {
-    kotlin("jvm") version "1.9.23"
+    kotlin("jvm") version "1.9.24"
     id("com.github.johnrengelman.shadow") version "8.1.1"
     id("org.jlleitschuh.gradle.ktlint") version "11.6.1"
     id("org.hidetake.swagger.generator") version "2.19.2" apply true
