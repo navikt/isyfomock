@@ -172,6 +172,26 @@ paths:
         '500':
           description: Internal server error
 
+  /senoppfolging/svar:
+    post:
+      operationId: sendVarsel
+      tags:
+        - Meroppfølging
+      summary: Sender svar på sen oppfølging på Kafka til Modia
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SenOppfolgingSvarRequest'
+      responses:
+        '200':
+          description: Ok
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal server error
+
   /reset/{fnr}:
     post:
       operationId: resetTestdata
@@ -319,3 +339,41 @@ components:
       required:
         - type
         - arbeidstakerFnr
+
+    SenOppfolgingSvarRequest:
+      type: object
+      properties:
+        personIdent:
+          type: string
+          description: fnr til den sykmeldte
+        response:
+          type: array
+          description: svarene til den sykmeldte på sen oppfølging-skjema
+          items:
+            type: object
+            properties:
+              questionType:
+                type: String
+              questionText:
+                type: String
+              answerType:
+                type: String
+              answerText:
+                type: String
+          example: [
+            {
+              "questionType": "FREMTIDIG_SITUASJON",
+              "questionText": "I hvilken situasjon ser du for deg at du står når sykepengene tar slutt?",
+              "answerType": "TILBAKE_HOS_ARBEIDSGIVER",
+              "answerText": "Jeg er frisk og tilbake hos arbeidsgiver"
+            },
+            {
+              "questionType": "BEHOV_FOR_OPPFOLGING",
+              "questionText": "Har du behov for hjelp fra oss i NAV?",
+              "answerType": "JA",
+              "answerText": "Ja, jeg vil snakke med en veileder i NAV"
+            }
+          ]
+      required:
+        - personIdent
+        - response
