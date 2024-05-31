@@ -61,6 +61,7 @@ dependencies {
 
     // (De-)serialization
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonDataTypeVersion")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonDataTypeVersion")
     implementation("javax.xml.bind:jaxb-api:$jaxbVersion")
     implementation("org.glassfish.jaxb:jaxb-runtime:$jaxbVersion")
     implementation("com.migesok:jaxb-java-time-adapters:$javaTimeAdapterVersion")

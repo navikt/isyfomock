@@ -174,7 +174,7 @@ paths:
 
   /senoppfolging/svar:
     post:
-      operationId: sendVarsel
+      operationId: senOppfolgingSvar
       tags:
         - Meroppfølging
       summary: Sender svar på sen oppfølging på Kafka til Modia

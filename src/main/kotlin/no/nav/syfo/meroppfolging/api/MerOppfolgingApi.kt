@@ -7,9 +7,9 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.util.*
 import no.nav.syfo.meroppfolging.SenOppfolgingSvarProducer
-import no.nav.syfo.meroppfolging.model.SenOppfolgingQuestionTypeV2
 import no.nav.syfo.meroppfolging.model.SenOppfolgingQuestionV2
 import no.nav.syfo.meroppfolging.model.SenOppfolgingSvar
+import no.nav.syfo.util.configuredJacksonMapper
 import java.time.LocalDateTime
 import java.util.*
 
@@ -22,14 +22,14 @@ fun Route.registerMerOppfolgingApi(
     producer: SenOppfolgingSvarProducer,
 ) {
     post("/senoppfolging/svar") {
-        // val mapper = ObjectMapper()
+        val mapper = configuredJacksonMapper()
         val formParameters = call.receiveParameters()
-        // val response = formParameters[SenOppfolgingSvarRequestParameters.response]
+        val response = formParameters[SenOppfolgingSvarRequestParameters.response]
         val hendelse = SenOppfolgingSvar(
             id = UUID.randomUUID(),
             personIdent = formParameters.getOrFail(SenOppfolgingSvarRequestParameters.personIdent),
             createdAt = LocalDateTime.now(),
-            response = listOf(SenOppfolgingQuestionV2(SenOppfolgingQuestionTypeV2.ONSKER_OPPFOLGING, "Ja", "ja,", "ja")),
+            response = if (response != null) mapper.readValue(response, Array<SenOppfolgingQuestionV2>::class.java).asList() else emptyList(),
         )
 
         call.respond(HttpStatusCode.OK, producer.sendSvar(hendelse))
