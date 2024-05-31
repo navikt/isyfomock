@@ -19,5 +19,5 @@ data class SenOppfolgingQuestionV2(
 
 enum class SenOppfolgingQuestionTypeV2 {
     FREMTIDIG_SITUASJON,
-    ONSKER_OPPFOLGING,
+    BEHOV_FOR_OPPFOLGING,
 }
