@@ -24,7 +24,7 @@ class MerOppfolgingApiSpek : Spek(
     {
 
         val question = SenOppfolgingQuestionV2(
-            SenOppfolgingQuestionTypeV2.ONSKER_OPPFOLGING,
+            SenOppfolgingQuestionTypeV2.BEHOV_FOR_OPPFOLGING,
             "Ja",
             "ja,",
             "ja",
