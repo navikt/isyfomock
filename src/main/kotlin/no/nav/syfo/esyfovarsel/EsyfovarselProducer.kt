@@ -21,7 +21,7 @@ class EsyfovarselProducer(
                     UUID.randomUUID().toString(),
                     esyfovarselHendelse,
                 ),
-            ).get()
+            ).also { it.get() }
         } catch (e: Exception) {
             log.error("Exception was thrown when attempting to send varsel to esyfovarsel. ${e.message}")
             throw e

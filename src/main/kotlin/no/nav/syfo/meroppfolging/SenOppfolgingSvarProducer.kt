@@ -20,7 +20,7 @@ class SenOppfolgingSvarProducer(
                     UUID.randomUUID().toString(),
                     senOppfolgingSvar,
                 ),
-            ).get()
+            ).also { it.get() }
         } catch (e: Exception) {
             log.error("Exception was thrown when attempting to send svar to $SEN_OPPFOLGING_SVAR_TOPIC. ${e.message}")
             throw e

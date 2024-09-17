@@ -21,7 +21,7 @@ class TestdataResetProducer(
                     UUID.randomUUID().toString(),
                     ident.value,
                 ),
-            ).get()
+            ).also { it.get() }
         } catch (e: Exception) {
             log.error("Exception was thrown when attempting to send reset message. ${e.message}")
             throw e

@@ -19,22 +19,16 @@ val swaggerUiVersion = "5.17.2"
 val kafkaVersion = "3.7.0"
 
 plugins {
-    kotlin("jvm") version "1.9.24"
-    id("com.github.johnrengelman.shadow") version "8.1.1"
+    kotlin("jvm") version "2.0.20"
+    id("com.gradleup.shadow") version "8.3.1"
     id("org.jlleitschuh.gradle.ktlint") version "11.6.1"
     id("org.hidetake.swagger.generator") version "2.19.2" apply true
 }
 
-val githubUser: String by project
-val githubPassword: String by project
 repositories {
     mavenCentral()
     maven {
-        url = uri("https://maven.pkg.github.com/navikt/syfotjenester")
-        credentials {
-            username = githubUser
-            password = githubPassword
-        }
+        url = uri("https://github-package-registry-mirror.gc.nav.no/cached/maven-release")
     }
 }
 
@@ -101,11 +95,11 @@ swaggerSources {
 }
 
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(21)
 }
 
 tasks {
-    withType<Jar> {
+    jar {
         manifest.attributes["Main-Class"] = "no.nav.syfo.ApplicationKt"
     }
 
@@ -115,18 +109,19 @@ tasks {
         }
     }
 
-    withType<org.hidetake.gradle.swagger.generator.GenerateSwaggerUI> {
-        outputDir = File(buildDir.path + "/resources/main/api")
+    generateSwaggerUI {
+        val output: Provider<Directory> = layout.buildDirectory.dir("/resources/main/api")
+        outputDir = output.get().asFile
     }
 
-    withType<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar> {
+    shadowJar {
         archiveBaseName.set("app")
         archiveClassifier.set("")
         archiveVersion.set("")
         dependsOn("generateSwaggerUI")
     }
 
-    withType<Test> {
+    test {
         useJUnitPlatform {
             includeEngines("spek2")
         }
