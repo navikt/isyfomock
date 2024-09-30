@@ -110,7 +110,8 @@ tasks {
     }
 
     generateSwaggerUI {
-        outputDir = File(buildDir.path + "/resources/main/api")
+        val output: Provider<Directory> = layout.buildDirectory.dir("/resources/main/api")
+        outputDir = output.get().asFile
     }
 
     shadowJar {
