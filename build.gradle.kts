@@ -3,38 +3,32 @@ version = "0.0.1"
 
 val jaxbVersion = "2.3.1"
 val kithApprecVersion = "2019.09.09-08-50-693492ddc1d3f98e70c1638c94dcb95a66036d12"
-val ktorVersion = "2.3.11"
+val ktorVersion = "2.3.12"
 val kluentVersion = "1.73"
-val mockkVersion = "1.13.10"
-val jacksonDataTypeVersion = "2.17.1"
+val mockkVersion = "1.13.12"
+val jacksonDataTypeVersion = "2.17.2"
 val javaTimeAdapterVersion = "1.1.3"
 val jsonVersion = "20231013"
 val logbackVersion = "1.5.6"
 val logstashEncoderVersion = "7.4"
-val micrometerRegistryVersion = "1.12.6"
-val mqVersion = "9.3.5.1"
+val micrometerRegistryVersion = "1.12.8"
+val mqVersion = "9.4.0.0"
 val spekVersion = "2.0.19"
 val syfotjenesterVersion = "1.2021.06.09-13.09-b3d30de9996e"
-val swaggerUiVersion = "5.17.2"
-val kafkaVersion = "3.7.0"
+val swaggerUiVersion = "5.17.14"
+val kafkaVersion = "3.8.0"
 
 plugins {
     kotlin("jvm") version "1.9.24"
-    id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("com.gradleup.shadow") version "8.3.2"
     id("org.jlleitschuh.gradle.ktlint") version "11.6.1"
     id("org.hidetake.swagger.generator") version "2.19.2" apply true
 }
 
-val githubUser: String by project
-val githubPassword: String by project
 repositories {
     mavenCentral()
     maven {
-        url = uri("https://maven.pkg.github.com/navikt/syfotjenester")
-        credentials {
-            username = githubUser
-            password = githubPassword
-        }
+        url = uri("https://github-package-registry-mirror.gc.nav.no/cached/maven-release")
     }
 }
 
@@ -105,7 +99,7 @@ kotlin {
 }
 
 tasks {
-    withType<Jar> {
+    jar {
         manifest.attributes["Main-Class"] = "no.nav.syfo.ApplicationKt"
     }
 
@@ -115,18 +109,18 @@ tasks {
         }
     }
 
-    withType<org.hidetake.gradle.swagger.generator.GenerateSwaggerUI> {
+    generateSwaggerUI {
         outputDir = File(buildDir.path + "/resources/main/api")
     }
 
-    withType<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar> {
+    shadowJar {
         archiveBaseName.set("app")
         archiveClassifier.set("")
         archiveVersion.set("")
         dependsOn("generateSwaggerUI")
     }
 
-    withType<Test> {
+    test {
         useJUnitPlatform {
             includeEngines("spek2")
         }
