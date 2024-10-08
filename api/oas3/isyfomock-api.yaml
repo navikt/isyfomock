@@ -346,6 +346,9 @@ components:
         personIdent:
           type: string
           description: fnr til den sykmeldte
+        varselId:
+          description: valgfri referanse til varsel det svares på
+          type: string
         response:
           type: array
           description: svarene til den sykmeldte på sen oppfølging-skjema
