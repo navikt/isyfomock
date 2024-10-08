@@ -6,6 +6,7 @@ import no.nav.syfo.application.ApplicationState
 import no.nav.syfo.application.api.apiModule
 import no.nav.syfo.esyfovarsel.model.EsyfovarselHendelse
 import no.nav.syfo.meroppfolging.model.SenOppfolgingSvar
+import no.nav.syfo.meroppfolging.model.SenOppfolgingVarsel
 import no.nav.syfo.mq.MQSender
 import org.apache.kafka.clients.producer.KafkaProducer
 
@@ -15,6 +16,7 @@ fun Application.testApiModule(
     apprecMQSender: MQSender = mockk(),
     esyfovarselHendelseProducer: KafkaProducer<String, EsyfovarselHendelse> = mockk(),
     senOppfolgingSvarProducer: KafkaProducer<String, SenOppfolgingSvar> = mockk(),
+    senOppfolgingVarselProducer: KafkaProducer<String, SenOppfolgingVarsel> = mockk(),
     testdataResetProducer: KafkaProducer<String, String> = mockk(),
 ) {
     this.apiModule(
@@ -24,6 +26,7 @@ fun Application.testApiModule(
         environment = testEnvironment(),
         esyfovarselHendelseProducer = esyfovarselHendelseProducer,
         senOppfolgingSvarProducer = senOppfolgingSvarProducer,
+        senOppfolgingVarselProducer = senOppfolgingVarselProducer,
         testdataResetKafkaProducer = testdataResetProducer,
     )
 }

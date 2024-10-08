@@ -13,3 +13,12 @@ fun kafkaSenOppfolgingSvarProducerConfig(
         this[ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG] = KafkaSenOppfolgingSvarSerializer::class.java.canonicalName
     }
 }
+
+fun kafkaSenOppfolgingVarselProducerConfig(
+    kafkaEnvironment: KafkaEnvironment,
+): Properties {
+    return Properties().apply {
+        putAll(commonKafkaAivenProducerConfig(kafkaEnvironment))
+        this[ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG] = KafkaSenOppfolgingVarselSerializer::class.java.canonicalName
+    }
+}
