@@ -14,24 +14,16 @@ jobs:
       contents: "read"
       id-token: "write"
     steps:
+      - name: Checkout code
+        uses: actions/checkout@master
       - name: Setup java
         uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
           java-version: '17.x'
-      - name: Checkout code
-        uses: actions/checkout@master
+          cache: 'gradle'
       - name: Gradle wrapper validation
         uses: gradle/wrapper-validation-action@v2
-      - name: Setup gradle dependency cache
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/.*gradle*') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
       - name: Run lint
         run: |
           ./gradlew --continue ktlintCheck
