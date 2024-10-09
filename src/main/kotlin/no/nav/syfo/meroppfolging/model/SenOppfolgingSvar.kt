@@ -8,7 +8,7 @@ data class SenOppfolgingSvar(
     val personIdent: String,
     val createdAt: LocalDateTime,
     val response: List<SenOppfolgingQuestionV2>,
-    val varselId: UUID?,
+    val varselId: UUID,
 )
 
 data class SenOppfolgingQuestionV2(

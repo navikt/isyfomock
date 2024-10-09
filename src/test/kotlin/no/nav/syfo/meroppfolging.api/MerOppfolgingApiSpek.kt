@@ -6,7 +6,6 @@ import io.mockk.clearAllMocks
 import io.mockk.mockk
 import io.mockk.slot
 import io.mockk.verify
-import junit.framework.TestCase.assertNull
 import junit.framework.TestCase.assertTrue
 import kafka.utils.Json
 import no.nav.syfo.meroppfolging.model.SenOppfolgingQuestionTypeV2
@@ -24,7 +23,7 @@ import java.util.UUID
 
 class MerOppfolgingApiSpek : Spek(
     {
-
+        val varselId = UUID.randomUUID().toString()
         val question = SenOppfolgingQuestionV2(
             SenOppfolgingQuestionTypeV2.BEHOV_FOR_OPPFOLGING,
             "Ja",
@@ -33,6 +32,7 @@ class MerOppfolgingApiSpek : Spek(
         )
         val svarParams = arrayOf(
             SenOppfolgingSvarRequestParameters.personIdent to "321",
+            SenOppfolgingSvarRequestParameters.varselId to varselId,
             SenOppfolgingSvarRequestParameters.response to Json.encodeAsString(
                 listOf(
                     question,
@@ -58,7 +58,7 @@ class MerOppfolgingApiSpek : Spek(
 
                 describe("Svar") {
                     val url = "/senoppfolging/svar"
-                    it("Sender svar på kafka (uten varselId)") {
+                    it("Sender svar på kafka") {
 
                         val capturedRecord = slot<ProducerRecord<String, SenOppfolgingSvar>>()
 
@@ -79,29 +79,6 @@ class MerOppfolgingApiSpek : Spek(
                             val capturedRecordValue = capturedRecord.captured.value()
                             assertEquals("321", capturedRecordValue.personIdent)
                             assertTrue(capturedRecordValue.response.contains(question))
-                            assertNull(capturedRecordValue.varselId)
-                        }
-                    }
-
-                    it("Sender svar på kafka med varselId") {
-                        val capturedRecord = slot<ProducerRecord<String, SenOppfolgingSvar>>()
-
-                        val varselId = UUID.randomUUID().toString()
-                        val requestParameters = listOf(
-                            *svarParams,
-                            SenOppfolgingSvarRequestParameters.varselId to varselId,
-                        )
-
-                        with(
-                            handleRequest(HttpMethod.Post, url) {
-                                addHeader("Content-Type", ContentType.Application.FormUrlEncoded.toString())
-                                setBody(requestParameters.formUrlEncode())
-                            },
-                        ) {
-                            response.status() shouldBeEqualTo HttpStatusCode.OK
-
-                            verify(exactly = 1) { svarProducer.send(capture(capturedRecord)) }
-
                             assertEquals(varselId, capturedRecord.captured.value().varselId.toString())
                         }
                     }

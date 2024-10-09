@@ -376,7 +376,7 @@ components:
           type: string
           description: fnr til den sykmeldte
         varselId:
-          description: valgfri referanse til varsel det svares på
+          description: referanse til varsel det svares på
           type: string
         response:
           type: array
@@ -408,4 +408,5 @@ components:
           ]
       required:
         - personIdent
+        - varselId
         - response

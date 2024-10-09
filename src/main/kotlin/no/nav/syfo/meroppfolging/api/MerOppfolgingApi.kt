@@ -35,7 +35,7 @@ fun Route.registerMerOppfolgingApi(
         val response = formParameters[SenOppfolgingSvarRequestParameters.response]
         val hendelse = SenOppfolgingSvar(
             id = UUID.randomUUID(),
-            varselId = formParameters[SenOppfolgingSvarRequestParameters.varselId]?.let { UUID.fromString(it) },
+            varselId = UUID.fromString(formParameters.getOrFail(SenOppfolgingSvarRequestParameters.varselId)),
             personIdent = formParameters.getOrFail(SenOppfolgingSvarRequestParameters.personIdent),
             createdAt = LocalDateTime.now(),
             response = if (response != null) mapper.readValue(response, Array<SenOppfolgingQuestionV2>::class.java).asList() else emptyList(),
