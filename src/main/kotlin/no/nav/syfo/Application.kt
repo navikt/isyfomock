@@ -8,7 +8,9 @@ import no.nav.syfo.application.api.apiModule
 import no.nav.syfo.esyfovarsel.kafka.kafkaEsyfovarselHendelseProducerConfig
 import no.nav.syfo.esyfovarsel.model.EsyfovarselHendelse
 import no.nav.syfo.meroppfolging.kafka.kafkaSenOppfolgingSvarProducerConfig
+import no.nav.syfo.meroppfolging.kafka.kafkaSenOppfolgingVarselProducerConfig
 import no.nav.syfo.meroppfolging.model.SenOppfolgingSvar
+import no.nav.syfo.meroppfolging.model.SenOppfolgingVarsel
 import no.nav.syfo.mq.MQSender
 import no.nav.syfo.reset.kafka.kafkaTestdataResetHendelseProducerConfig
 import org.apache.kafka.clients.producer.KafkaProducer
@@ -44,6 +46,11 @@ fun main() {
             kafkaEnvironment = environment.kafka,
         ),
     )
+    val senOppfolgingVarselProducer = KafkaProducer<String, SenOppfolgingVarsel>(
+        kafkaSenOppfolgingVarselProducerConfig(
+            kafkaEnvironment = environment.kafka,
+        ),
+    )
 
     val testdataResetProducer = KafkaProducer<String, String>(
         kafkaTestdataResetHendelseProducerConfig(
@@ -57,12 +64,13 @@ fun main() {
         }
         module {
             apiModule(
+                applicationState = applicationState,
                 mqSender = mqSender,
                 apprecMQSender = apprecMqSender,
-                applicationState = applicationState,
                 environment = environment,
                 esyfovarselHendelseProducer = esyfovarselHendelseProducer,
                 senOppfolgingSvarProducer = senOppfolgingSvarProducer,
+                senOppfolgingVarselProducer = senOppfolgingVarselProducer,
                 testdataResetKafkaProducer = testdataResetProducer,
             )
         }

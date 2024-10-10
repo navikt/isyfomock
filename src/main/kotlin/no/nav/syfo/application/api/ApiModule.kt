@@ -24,8 +24,10 @@ import no.nav.syfo.esyfovarsel.EsyfovarselProducer
 import no.nav.syfo.esyfovarsel.api.registerEsyfovarselApi
 import no.nav.syfo.esyfovarsel.model.EsyfovarselHendelse
 import no.nav.syfo.meroppfolging.SenOppfolgingSvarProducer
+import no.nav.syfo.meroppfolging.SenOppfolgingVarselProducer
 import no.nav.syfo.meroppfolging.api.registerMerOppfolgingApi
 import no.nav.syfo.meroppfolging.model.SenOppfolgingSvar
+import no.nav.syfo.meroppfolging.model.SenOppfolgingVarsel
 import no.nav.syfo.motebehov.MotebehovService
 import no.nav.syfo.motebehov.api.registerMotebehovApi
 import no.nav.syfo.mq.MQSender
@@ -42,6 +44,7 @@ fun Application.apiModule(
     environment: Environment,
     esyfovarselHendelseProducer: KafkaProducer<String, EsyfovarselHendelse>,
     senOppfolgingSvarProducer: KafkaProducer<String, SenOppfolgingSvar>,
+    senOppfolgingVarselProducer: KafkaProducer<String, SenOppfolgingVarsel>,
     testdataResetKafkaProducer: KafkaProducer<String, String>,
 ) {
     install(ContentNegotiation) {
@@ -88,7 +91,6 @@ fun Application.apiModule(
     val aktorService = AktorService(pdlClient = pdlClient)
     val oppfolgingsplanService = OppfolgingsplanService(oppfolgingsplanUrl = environment.oppfolgingsplanUrl)
     val esyfovarselProducer = EsyfovarselProducer(kafkaProducer = esyfovarselHendelseProducer)
-    val senOppfolgingProducer = SenOppfolgingSvarProducer(kafkaProducer = senOppfolgingSvarProducer)
     val testdataResetProducer = TestdataResetProducer(kafkaProducer = testdataResetKafkaProducer)
 
     routing {
@@ -101,7 +103,10 @@ fun Application.apiModule(
         registerAktorApi(aktorService = aktorService)
         registerOppfolgingsplanApi(oppfolgingsplanService = oppfolgingsplanService)
         registerEsyfovarselApi(esyfovarselProducer = esyfovarselProducer)
-        registerMerOppfolgingApi(producer = senOppfolgingProducer)
+        registerMerOppfolgingApi(
+            svarProducer = SenOppfolgingSvarProducer(kafkaProducer = senOppfolgingSvarProducer),
+            varselProducer = SenOppfolgingVarselProducer(kafkaProducer = senOppfolgingVarselProducer),
+        )
         registerTestdataResetApi(producer = testdataResetProducer)
     }
 }
