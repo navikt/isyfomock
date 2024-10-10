@@ -363,16 +363,16 @@ components:
     SenOppfolgingVarselRequest:
       type: object
       properties:
-        personIdent:
+        personident:
           type: string
           description: fnr til den sykmeldte
       required:
-        - personIdent
+        - personident
 
     SenOppfolgingSvarRequest:
       type: object
       properties:
-        personIdent:
+        personident:
           type: string
           description: fnr til den sykmeldte
         varselId:
@@ -407,6 +407,6 @@ components:
             }
           ]
       required:
-        - personIdent
+        - personident
         - varselId
         - response

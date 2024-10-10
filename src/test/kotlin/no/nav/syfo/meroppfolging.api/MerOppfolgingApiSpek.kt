@@ -31,7 +31,7 @@ class MerOppfolgingApiSpek : Spek(
             "ja",
         )
         val svarParams = arrayOf(
-            SenOppfolgingSvarRequestParameters.personIdent to "321",
+            SenOppfolgingSvarRequestParameters.personident to "321",
             SenOppfolgingSvarRequestParameters.varselId to varselId,
             SenOppfolgingSvarRequestParameters.response to Json.encodeAsString(
                 listOf(
@@ -40,7 +40,7 @@ class MerOppfolgingApiSpek : Spek(
             ),
         )
         val varselParams = arrayOf(
-            SenOppfolgingVarselRequestParameters.personIdent to "12345678912",
+            SenOppfolgingVarselRequestParameters.personident to "12345678912",
         )
 
         with(TestApplicationEngine()) {

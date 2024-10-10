@@ -16,13 +16,13 @@ import java.time.LocalDateTime
 import java.util.*
 
 object SenOppfolgingSvarRequestParameters {
-    const val personIdent = "personIdent"
+    const val personident = "personident"
     const val varselId = "varselId"
     const val response = "response"
 }
 
 object SenOppfolgingVarselRequestParameters {
-    const val personIdent = "personIdent"
+    const val personident = "personident"
 }
 
 fun Route.registerMerOppfolgingApi(
@@ -36,7 +36,7 @@ fun Route.registerMerOppfolgingApi(
         val hendelse = SenOppfolgingSvar(
             id = UUID.randomUUID(),
             varselId = UUID.fromString(formParameters.getOrFail(SenOppfolgingSvarRequestParameters.varselId)),
-            personIdent = formParameters.getOrFail(SenOppfolgingSvarRequestParameters.personIdent),
+            personIdent = formParameters.getOrFail(SenOppfolgingSvarRequestParameters.personident),
             createdAt = LocalDateTime.now(),
             response = if (response != null) mapper.readValue(response, Array<SenOppfolgingQuestionV2>::class.java).asList() else emptyList(),
         )
@@ -46,7 +46,7 @@ fun Route.registerMerOppfolgingApi(
 
     post("/senoppfolging/varsel") {
         val formParameters = call.receiveParameters()
-        val personIdent = formParameters.getOrFail(SenOppfolgingVarselRequestParameters.personIdent)
+        val personIdent = formParameters.getOrFail(SenOppfolgingVarselRequestParameters.personident)
         val varselUuid = UUID.randomUUID()
         val senOppfolgingVarsel = SenOppfolgingVarsel(
             uuid = varselUuid,
