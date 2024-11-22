@@ -42,9 +42,11 @@ spec:
         - host: "b27apvl221.preprod.local"
           ports:
             - port: 1413
-        - host: "syfomotebehov.dev-fss-pub.nais.io"
         - host: "syfooppfolgingsplanservice.dev-fss-pub.nais.io"
         - host: "pdl-api.dev-fss-pub.nais.io"
+      rules:
+        - application: syfomotebehov
+          namespace: team-esyfo
   envFrom:
     - secret: isyfomock-serviceuser
   env:
@@ -72,7 +74,7 @@ spec:
       value: "dev-fss.pdl.pdl-api"
     - name: PDL_URL
       value: "https://pdl-api.dev-fss-pub.nais.io/graphql"
-    - name: MOTEBEHOV_URL
-      value: "https://syfomotebehov.dev-fss-pub.nais.io/syfomotebehov"
+    - name: SYFOMOTEBEHOV_URL
+      value: "http://syfomotebehov.team-esyfo"
     - name: OPPFOLGINGSPLAN_URL
       value: "https://syfooppfolgingsplanservice.dev-fss-pub.nais.io/syfooppfolgingsplanservice"
