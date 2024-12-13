@@ -1,6 +1,8 @@
 package no.nav.syfo
 
+import com.typesafe.config.ConfigFactory
 import io.ktor.server.application.*
+import io.ktor.server.config.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import no.nav.syfo.application.ApplicationState
@@ -58,11 +60,23 @@ fun main() {
         ),
     )
 
-    val applicationEngineEnvironment = applicationEngineEnvironment {
-        connector {
-            port = environment.applicationPort
-        }
-        module {
+    val applicationEnvironment = applicationEnvironment {
+        log = log
+        config = HoconApplicationConfig(ConfigFactory.load())
+    }
+
+    val server = embeddedServer(
+        Netty,
+        environment = applicationEnvironment,
+        configure = {
+            connector {
+                port = environment.applicationPort
+            }
+            connectionGroupSize = 8
+            workerGroupSize = 8
+            callGroupSize = 16
+        },
+        module = {
             apiModule(
                 applicationState = applicationState,
                 mqSender = mqSender,
@@ -73,17 +87,11 @@ fun main() {
                 senOppfolgingVarselProducer = senOppfolgingVarselProducer,
                 testdataResetKafkaProducer = testdataResetProducer,
             )
-        }
-    }
-
-    applicationEngineEnvironment.monitor.subscribe(ApplicationStarted) { application ->
-        applicationState.ready = true
-        application.environment.log.info("Application is ready, running Java VM ${Runtime.version()}")
-    }
-
-    val server = embeddedServer(
-        factory = Netty,
-        environment = applicationEngineEnvironment,
+            monitor.subscribe(ApplicationStarted) {
+                applicationState.ready = true
+                log.info("Application is ready, running Java VM ${Runtime.version()}")
+            }
+        },
     )
 
     Runtime.getRuntime().addShutdownHook(

@@ -3,20 +3,20 @@ version = "0.0.1"
 
 val jaxbVersion = "2.3.1"
 val kithApprecVersion = "2019.09.09-08-50-693492ddc1d3f98e70c1638c94dcb95a66036d12"
-val ktorVersion = "2.3.12"
+val ktorVersion = "3.0.2"
 val kluentVersion = "1.73"
 val mockkVersion = "1.13.12"
-val jacksonDataTypeVersion = "2.17.2"
+val jacksonDataTypeVersion = "2.18.0"
 val javaTimeAdapterVersion = "1.1.3"
-val jsonVersion = "20231013"
-val logbackVersion = "1.5.6"
+val jsonVersion = "20240303"
+val logbackVersion = "1.5.12"
 val logstashEncoderVersion = "7.4"
 val micrometerRegistryVersion = "1.12.8"
 val mqVersion = "9.4.0.0"
 val spekVersion = "2.0.19"
 val syfotjenesterVersion = "1.2021.06.09-13.09-b3d30de9996e"
 val swaggerUiVersion = "5.17.2"
-val kafkaVersion = "3.8.0"
+val kafkaVersion = "3.9.0"
 
 plugins {
     kotlin("jvm") version "1.9.24"
@@ -74,6 +74,26 @@ dependencies {
         exclude(group = "log4j")
     }
     implementation("org.apache.kafka:kafka_2.13:$kafkaVersion", excludeLog4j)
+    constraints {
+        implementation("org.apache.zookeeper:zookeeper") {
+            because("org.apache.kafka:kafka_2.13:$kafkaVersion -> https://www.cve.org/CVERecord?id=CVE-2023-44981")
+            version {
+                require("3.9.3")
+            }
+        }
+        implementation("org.bitbucket.b_c:jose4j") {
+            because("org.apache.kafka:kafka_2.13:$kafkaVersion -> https://github.com/advisories/GHSA-6qvw-249j-h44c")
+            version {
+                require("0.9.6")
+            }
+        }
+        implementation("org.apache.commons:commons-compress") {
+            because("org.apache.commons:commons-compress:1.22 -> https://www.cve.org/CVERecord?id=CVE-2012-2098")
+            version {
+                require("1.27.1")
+            }
+        }
+    }
 
     swaggerUI("org.webjars:swagger-ui:$swaggerUiVersion")
 
@@ -95,7 +115,7 @@ swaggerSources {
 }
 
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(21)
 }
 
 tasks {
