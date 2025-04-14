@@ -19,7 +19,7 @@ val swaggerUiVersion = "5.17.2"
 val kafkaVersion = "3.9.0"
 
 plugins {
-    kotlin("jvm") version "1.9.24"
+    kotlin("jvm") version "2.1.20"
     id("com.gradleup.shadow") version "8.3.2"
     id("org.jlleitschuh.gradle.ktlint") version "11.6.1"
     id("org.hidetake.swagger.generator") version "2.19.2" apply true
