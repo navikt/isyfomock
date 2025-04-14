@@ -16,7 +16,7 @@ val mqVersion = "9.4.0.0"
 val spekVersion = "2.0.19"
 val syfotjenesterVersion = "1.2021.06.09-13.09-b3d30de9996e"
 val swaggerUiVersion = "5.17.2"
-val kafkaVersion = "3.9.0"
+val kafkaVersion = "4.0.0"
 
 plugins {
     kotlin("jvm") version "1.9.24"
