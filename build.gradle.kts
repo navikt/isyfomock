@@ -134,10 +134,15 @@ tasks {
     }
 
     withType<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar> {
+        mergeServiceFiles()
         archiveBaseName.set("app")
         archiveClassifier.set("")
         archiveVersion.set("")
         dependsOn("generateSwaggerUI")
+    }
+
+    named("build") {
+        dependsOn("shadowJar")
     }
 
     withType<Test> {
