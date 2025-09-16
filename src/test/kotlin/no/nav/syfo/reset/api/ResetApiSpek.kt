@@ -13,7 +13,7 @@ import testhelper.setupApiAndClient
 import java.util.concurrent.Future
 
 class ResetApiSpek : Spek({
-    val testdataResetProducer = mockk<KafkaProducer<String, String>>()
+    val testdataResetProducer = mockk<KafkaProducer<String, String>>(relaxed = true)
 
     describe(ResetApiSpek::class.java.simpleName) {
         beforeEachTest {
@@ -23,9 +23,12 @@ class ResetApiSpek : Spek({
         describe("Resetter testdata for bruker") {
             it("Resetter testdata med gyldig fnr") {
                 testApplication {
+                    val mockFuture = mockk<Future<RecordMetadata>>()
+                    val mockRecordMetadata = mockk<RecordMetadata>()
+                    every { mockFuture.get() } returns mockRecordMetadata
                     coEvery {
                         testdataResetProducer.send(any())
-                    } returns mockk<Future<RecordMetadata>>(relaxed = true)
+                    } returns mockFuture
                     val url = "/reset/12345678910"
                     val client = setupApiAndClient(testdataResetProducer = testdataResetProducer)
                     val response = client.post(url) {}
