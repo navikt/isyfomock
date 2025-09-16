@@ -3,10 +3,7 @@ package no.nav.syfo.meroppfolging.api
 import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.server.testing.*
-import io.mockk.clearAllMocks
-import io.mockk.mockk
-import io.mockk.slot
-import io.mockk.verify
+import io.mockk.*
 import kafka.utils.Json
 import no.nav.syfo.meroppfolging.model.SenOppfolgingQuestionTypeV2
 import no.nav.syfo.meroppfolging.model.SenOppfolgingQuestionV2
@@ -17,6 +14,8 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldContain
 import org.apache.kafka.clients.producer.KafkaProducer
 import org.apache.kafka.clients.producer.ProducerRecord
+import org.apache.kafka.clients.producer.RecordMetadata
+import java.util.concurrent.Future
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
 import testhelper.setupApiAndClient
@@ -56,6 +55,11 @@ class MerOppfolgingApiSpek : Spek(
                 it("Sender svar på kafka") {
                     testApplication {
                         val capturedRecord = slot<ProducerRecord<String, SenOppfolgingSvar>>()
+                        // Mock future and record metadata to satisfy code calling future.get()
+                        val mockFuture = mockk<Future<RecordMetadata>>()
+                        val mockRecordMetadata = mockk<RecordMetadata>()
+                        every { mockFuture.get() } returns mockRecordMetadata
+                        every { svarProducer.send(capture(capturedRecord)) } returns mockFuture
                         val requestParameters = listOf(
                             *svarParams,
                         )
@@ -68,7 +72,7 @@ class MerOppfolgingApiSpek : Spek(
                             setBody(requestParameters.formUrlEncode())
                         }
                         response.status shouldBeEqualTo HttpStatusCode.OK
-                        verify(exactly = 1) { svarProducer.send(capture(capturedRecord)) }
+                        verify(exactly = 1) { svarProducer.send(any()) }
                         val capturedRecordValue = capturedRecord.captured.value()
                         assertEquals("321", capturedRecordValue.personIdent)
                         capturedRecordValue.response shouldContain question
@@ -83,6 +87,10 @@ class MerOppfolgingApiSpek : Spek(
                 it("Sender varsel på kafka") {
                     testApplication {
                         val capturedRecord = slot<ProducerRecord<String, SenOppfolgingVarsel>>()
+                        val mockFuture = mockk<Future<RecordMetadata>>()
+                        val mockRecordMetadata = mockk<RecordMetadata>()
+                        every { mockFuture.get() } returns mockRecordMetadata
+                        every { varselProducer.send(capture(capturedRecord)) } returns mockFuture
                         val requestParameters = listOf(
                             *varselParams,
                         )
@@ -95,7 +103,7 @@ class MerOppfolgingApiSpek : Spek(
                             setBody(requestParameters.formUrlEncode())
                         }
                         response.status shouldBeEqualTo HttpStatusCode.OK
-                        verify(exactly = 1) { varselProducer.send(capture(capturedRecord)) }
+                        verify(exactly = 1) { varselProducer.send(any()) }
 
                         val capturedRecordValue = capturedRecord.captured.value()
                         assertEquals("12345678912", capturedRecordValue.personident)

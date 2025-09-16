@@ -3,24 +3,24 @@ version = "0.0.1"
 
 val jaxbVersion = "2.3.1"
 val kithApprecVersion = "2019.09.09-08-50-693492ddc1d3f98e70c1638c94dcb95a66036d12"
-val ktorVersion = "3.0.3"
+val ktorVersion = "3.3.0"
 val kluentVersion = "1.73"
-val mockkVersion = "1.13.17"
-val jacksonDataTypeVersion = "2.18.3"
+val mockkVersion = "1.14.5"
+val jacksonDataTypeVersion = "2.19.2"
 val javaTimeAdapterVersion = "1.1.3"
 val jsonVersion = "20250107"
 val logbackVersion = "1.5.18"
-val logstashEncoderVersion = "8.0"
+val logstashEncoderVersion = "8.1"
 val micrometerRegistryVersion = "1.12.13"
-val mqVersion = "9.4.0.0"
+val mqVersion = "9.4.3.0"
 val spekVersion = "2.0.19"
-val syfotjenesterVersion = "1.2021.06.09-13.09-b3d30de9996e"
-val swaggerUiVersion = "5.17.2"
+val syfotjenesterVersion = "1.2022.09.09-14.42-5356e2174b6c"
+val swaggerUiVersion = "5.27.1"
 val kafkaVersion = "3.9.0"
 
 plugins {
-    kotlin("jvm") version "1.9.24"
-    id("com.gradleup.shadow") version "8.3.2"
+    kotlin("jvm") version "2.2.10"
+    id("com.gradleup.shadow") version "8.3.6"
     id("org.jlleitschuh.gradle.ktlint") version "11.6.1"
     id("org.hidetake.swagger.generator") version "2.19.2" apply true
 }
@@ -134,10 +134,15 @@ tasks {
     }
 
     withType<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar> {
+        mergeServiceFiles()
         archiveBaseName.set("app")
         archiveClassifier.set("")
         archiveVersion.set("")
         dependsOn("generateSwaggerUI")
+    }
+
+    named("build") {
+        dependsOn("shadowJar")
     }
 
     withType<Test> {

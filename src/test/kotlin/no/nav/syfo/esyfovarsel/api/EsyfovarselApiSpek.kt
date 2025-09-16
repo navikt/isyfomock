@@ -8,6 +8,8 @@ import no.nav.syfo.esyfovarsel.model.EsyfovarselHendelse
 import no.nav.syfo.esyfovarsel.model.HendelseType
 import org.amshove.kluent.shouldBeEqualTo
 import org.apache.kafka.clients.producer.KafkaProducer
+import org.apache.kafka.clients.producer.RecordMetadata
+import java.util.concurrent.Future
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
 import testhelper.setupApiAndClient
@@ -35,13 +37,17 @@ class EsyfovarselApiSpek : Spek({
     describe(EsyfovarselApiSpek::class.java.simpleName) {
         beforeEachTest {
             clearAllMocks()
-            justRun { esyfovarselProducer.send(any(), any()) }
         }
 
         describe("Nærmeste leder") {
             val url = "/esyfovarsel/arbeidsgiver/send"
             it("Sender varsel til nærmeste leder") {
                 testApplication {
+                    val mockFuture = mockk<Future<RecordMetadata>>()
+                    val mockRecordMetadata = mockk<RecordMetadata>()
+                    every { mockFuture.get() } returns mockRecordMetadata
+                    every { esyfovarselProducer.send(any()) } returns mockFuture
+                    every { esyfovarselProducer.send(any(), any()) } returns mockFuture
                     val requestParameters = listOf(
                         *arbeidsgiverRequestParams,
                     )
@@ -60,6 +66,11 @@ class EsyfovarselApiSpek : Spek({
             val url = "/esyfovarsel/arbeidstaker/send"
             it("Sender varsel til arbeidstaker") {
                 testApplication {
+                    val mockFuture = mockk<Future<RecordMetadata>>()
+                    val mockRecordMetadata = mockk<RecordMetadata>()
+                    every { mockFuture.get() } returns mockRecordMetadata
+                    every { esyfovarselProducer.send(any()) } returns mockFuture
+                    every { esyfovarselProducer.send(any(), any()) } returns mockFuture
                     val requestParameters = listOf(
                         *arbeidstakerRequestParams,
                     )
