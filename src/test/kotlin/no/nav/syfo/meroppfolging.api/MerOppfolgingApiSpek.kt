@@ -4,7 +4,6 @@ import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.server.testing.*
 import io.mockk.*
-import kafka.utils.Json
 import no.nav.syfo.meroppfolging.model.SenOppfolgingQuestionTypeV2
 import no.nav.syfo.meroppfolging.model.SenOppfolgingQuestionV2
 import no.nav.syfo.meroppfolging.model.SenOppfolgingSvar
@@ -20,6 +19,7 @@ import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
 import testhelper.setupApiAndClient
 import java.util.UUID
+import kotlinx.serialization.json.Json
 
 class MerOppfolgingApiSpek : Spek(
     {
@@ -33,7 +33,7 @@ class MerOppfolgingApiSpek : Spek(
         val svarParams = arrayOf(
             SenOppfolgingSvarRequestParameters.personident to "321",
             SenOppfolgingSvarRequestParameters.varselId to varselId,
-            SenOppfolgingSvarRequestParameters.response to Json.encodeAsString(
+            SenOppfolgingSvarRequestParameters.response to Json.encodeToString(
                 listOf(
                     question,
                 ),
