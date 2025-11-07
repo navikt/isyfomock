@@ -19,10 +19,11 @@ import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
 import testhelper.setupApiAndClient
 import java.util.UUID
-import kotlinx.serialization.json.Json
+import no.nav.syfo.util.configuredJacksonMapper
 
 class MerOppfolgingApiSpek : Spek(
     {
+        val objectMapper = configuredJacksonMapper()
         val varselId = UUID.randomUUID().toString()
         val question = SenOppfolgingQuestionV2(
             SenOppfolgingQuestionTypeV2.BEHOV_FOR_OPPFOLGING,
@@ -33,7 +34,7 @@ class MerOppfolgingApiSpek : Spek(
         val svarParams = arrayOf(
             SenOppfolgingSvarRequestParameters.personident to "321",
             SenOppfolgingSvarRequestParameters.varselId to varselId,
-            SenOppfolgingSvarRequestParameters.response to Json.encodeToString(
+            SenOppfolgingSvarRequestParameters.response to objectMapper.writeValueAsString(
                 listOf(
                     question,
                 ),

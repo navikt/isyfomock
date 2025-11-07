@@ -20,7 +20,6 @@ val kafkaVersion = "4.1.0"
 
 plugins {
     kotlin("jvm") version "2.2.20"
-    kotlin("plugin.serialization") version "2.2.20"
     id("com.gradleup.shadow") version "8.3.6"
     id("org.jlleitschuh.gradle.ktlint") version "11.6.1"
     id("org.hidetake.swagger.generator") version "2.19.2" apply true
@@ -60,7 +59,6 @@ dependencies {
     implementation("javax.xml.bind:jaxb-api:$jaxbVersion")
     implementation("org.glassfish.jaxb:jaxb-runtime:$jaxbVersion")
     implementation("com.migesok:jaxb-java-time-adapters:$javaTimeAdapterVersion")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
 
     // MQ
     implementation("com.ibm.mq:com.ibm.mq.allclient:$mqVersion")
