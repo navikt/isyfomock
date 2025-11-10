@@ -3,23 +3,23 @@ version = "0.0.1"
 
 val jaxbVersion = "2.3.1"
 val kithApprecVersion = "2019.09.09-08-50-693492ddc1d3f98e70c1638c94dcb95a66036d12"
-val ktorVersion = "3.3.0"
+val ktorVersion = "3.3.2"
 val kluentVersion = "1.73"
-val mockkVersion = "1.14.5"
-val jacksonDataTypeVersion = "2.19.2"
+val mockkVersion = "1.14.6"
+val jacksonDataTypeVersion = "2.20.1"
 val javaTimeAdapterVersion = "1.1.3"
-val jsonVersion = "20250107"
-val logbackVersion = "1.5.18"
-val logstashEncoderVersion = "8.1"
+val jsonVersion = "20250517"
+val logbackVersion = "1.5.20"
+val logstashEncoderVersion = "9.0"
 val micrometerRegistryVersion = "1.12.13"
 val mqVersion = "9.4.3.0"
 val spekVersion = "2.0.19"
 val syfotjenesterVersion = "1.2022.09.09-14.42-5356e2174b6c"
 val swaggerUiVersion = "5.27.1"
-val kafkaVersion = "3.9.1"
+val kafkaVersion = "4.1.0"
 
 plugins {
-    kotlin("jvm") version "2.2.10"
+    kotlin("jvm") version "2.2.20"
     id("com.gradleup.shadow") version "8.3.6"
     id("org.jlleitschuh.gradle.ktlint") version "11.6.1"
     id("org.hidetake.swagger.generator") version "2.19.2" apply true
@@ -75,12 +75,6 @@ dependencies {
     }
     implementation("org.apache.kafka:kafka_2.13:$kafkaVersion", excludeLog4j)
     constraints {
-        implementation("org.apache.zookeeper:zookeeper") {
-            because("org.apache.kafka:kafka_2.13:$kafkaVersion -> https://www.cve.org/CVERecord?id=CVE-2023-44981")
-            version {
-                require("3.9.3")
-            }
-        }
         implementation("org.bitbucket.b_c:jose4j") {
             because("org.apache.kafka:kafka_2.13:$kafkaVersion -> https://github.com/advisories/GHSA-6qvw-249j-h44c")
             version {
@@ -90,7 +84,13 @@ dependencies {
         implementation("org.apache.commons:commons-compress") {
             because("org.apache.commons:commons-compress:1.22 -> https://www.cve.org/CVERecord?id=CVE-2012-2098")
             version {
-                require("1.27.1")
+                require("1.28.0")
+            }
+        }
+        implementation("commons-beanutils:commons-beanutils") {
+            because("org.apache.kafka:kafka_2.13:$kafkaVersion -> https://www.cve.org/CVERecord?id=CVE-2025-48734")
+            version {
+                require("1.11.0")
             }
         }
     }
