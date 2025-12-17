@@ -3,13 +3,13 @@ version = "0.0.1"
 
 val jaxbVersion = "2.3.1"
 val kithApprecVersion = "2019.09.09-08-50-693492ddc1d3f98e70c1638c94dcb95a66036d12"
-val ktorVersion = "3.3.2"
+val ktorVersion = "3.3.3"
 val kluentVersion = "1.73"
-val mockkVersion = "1.14.6"
+val mockkVersion = "1.14.7"
 val jacksonDataTypeVersion = "2.20.1"
 val javaTimeAdapterVersion = "1.1.3"
 val jsonVersion = "20250517"
-val logbackVersion = "1.5.20"
+val logbackVersion = "1.5.22"
 val logstashEncoderVersion = "9.0"
 val micrometerRegistryVersion = "1.12.13"
 val mqVersion = "9.4.3.0"
@@ -20,7 +20,7 @@ val kafkaVersion = "4.1.0"
 
 plugins {
     kotlin("jvm") version "2.2.20"
-    id("com.gradleup.shadow") version "8.3.6"
+    id("com.gradleup.shadow") version "8.3.8"
     id("org.jlleitschuh.gradle.ktlint") version "11.6.1"
     id("org.hidetake.swagger.generator") version "2.19.2" apply true
 }
