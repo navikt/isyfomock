@@ -3,7 +3,7 @@ version = "0.0.1"
 
 val jaxbVersion = "2.3.1"
 val kithApprecVersion = "2019.09.09-08-50-693492ddc1d3f98e70c1638c94dcb95a66036d12"
-val ktorVersion = "3.3.3"
+val ktorVersion = "3.4.0"
 val kluentVersion = "1.73"
 val mockkVersion = "1.14.7"
 val jacksonDataTypeVersion = "2.20.1"
@@ -119,18 +119,19 @@ kotlin {
 }
 
 tasks {
-    withType<Jar> {
-        manifest.attributes["Main-Class"] = "no.nav.syfo.ApplicationKt"
+    withType<org.hidetake.gradle.swagger.generator.GenerateSwaggerUI> {
+        outputDir = File(buildDir.path + "/resources/main/api")
     }
 
-    create("printVersion") {
+    withType<Jar> {
+        manifest.attributes["Main-Class"] = "no.nav.syfo.ApplicationKt"
+        dependsOn("generateSwaggerUI")
+    }
+
+    create<Task>("printVersion") {
         doLast {
             println(project.version)
         }
-    }
-
-    withType<org.hidetake.gradle.swagger.generator.GenerateSwaggerUI> {
-        outputDir = File(buildDir.path + "/resources/main/api")
     }
 
     withType<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar> {
