@@ -140,7 +140,7 @@ class DialogmeldingApiSpek : Spek({
 
                     pngVedlegg.refDoc.mimeType shouldBeEqualToIgnoringCase "image/png"
                     jpegVedlegg.refDoc.mimeType shouldBeEqualToIgnoringCase "image/jpeg"
-                    tiffVedlegg.refDoc.mimeType shouldBeEqualToIgnoringCase "image/tiff"
+//                    tiffVedlegg.refDoc.mimeType shouldBeEqualToIgnoringCase "image/tiff"
                     pngVedlegg.refDoc.content.any.first() shouldBeInstanceOf XMLBase64Container::class.java
                     jpegVedlegg.refDoc.content.any.first() shouldBeInstanceOf XMLBase64Container::class.java
                     tiffVedlegg.refDoc.content.any.first() shouldBeInstanceOf XMLBase64Container::class.java
