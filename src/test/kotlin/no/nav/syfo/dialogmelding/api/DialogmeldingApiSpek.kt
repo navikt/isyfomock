@@ -8,7 +8,6 @@ import no.kith.xmlstds.base64container.XMLBase64Container
 import no.kith.xmlstds.dialog._2006_10_11.XMLDialogmelding
 import no.kith.xmlstds.msghead._2006_05_24.XMLDocument
 import no.kith.xmlstds.msghead._2006_05_24.XMLMsgHead
-import no.nav.syfo.dialogmelding.MSG_ID_PREFIX
 import no.nav.syfo.dialogmelding.get
 import no.nav.syfo.dialogmelding.model.DialogmeldingType
 import no.nav.syfo.mq.MQSender
@@ -103,7 +102,6 @@ class DialogmeldingApiSpek : Spek({
                     dialogmeldingNotat.tekstNotatInnhold shouldBeEqualTo notat
                     actualFellesformatXml.mottaksMeta.ediLoggId shouldNotBeEqualTo null
                     actualFellesformatXml.mottaksMeta.avsenderFnrFraDigSignatur shouldBeEqualTo legeFnr
-                    actualFellesformatXml.msgHead.msgInfo.msgId shouldContain MSG_ID_PREFIX
                     actualFellesformatXml.msgHead.msgInfo.patient.ident.first().id shouldBeEqualTo pasientFnr
                     actualFellesformatXml.msgHead.msgInfo.receiver.organisation.ident.first().id shouldBeEqualTo orgnr
                     actualFellesformatXml.msgHead.document.size shouldBeEqualTo 1
@@ -134,7 +132,6 @@ class DialogmeldingApiSpek : Spek({
                     dialogmeldingNotat.tekstNotatInnhold shouldBeEqualTo notat
                     actualFellesformatXml.mottaksMeta.ediLoggId shouldNotBeEqualTo null
                     actualFellesformatXml.mottaksMeta.avsenderFnrFraDigSignatur shouldBeEqualTo legeFnr
-                    actualFellesformatXml.msgHead.msgInfo.msgId shouldContain MSG_ID_PREFIX
                     actualFellesformatXml.msgHead.msgInfo.patient.ident.first().id shouldBeEqualTo pasientFnr
                     actualFellesformatXml.msgHead.msgInfo.receiver.organisation.ident.first().id shouldBeEqualTo orgnr
 
@@ -172,7 +169,6 @@ class DialogmeldingApiSpek : Spek({
                     actualFellesformatXml.mottaksMeta.ediLoggId shouldNotBeEqualTo null
                     actualFellesformatXml.mottaksMeta.avsenderFnrFraDigSignatur shouldBeEqualTo legeFnr
 
-                    actualFellesformatXml.msgHead.msgInfo.msgId shouldContain MSG_ID_PREFIX
                     actualFellesformatXml.msgHead.msgInfo.patient.ident.first().id shouldBeEqualTo pasientFnr
                     actualFellesformatXml.msgHead.msgInfo.receiver.organisation.ident.first().id shouldBeEqualTo orgnr
                 }
@@ -202,7 +198,6 @@ class DialogmeldingApiSpek : Spek({
                     actualFellesformatXml.mottaksMeta.ediLoggId shouldNotBeEqualTo null
                     actualFellesformatXml.mottaksMeta.avsenderFnrFraDigSignatur shouldBeEqualTo legeFnr
 
-                    actualFellesformatXml.msgHead.msgInfo.msgId shouldContain MSG_ID_PREFIX
                     actualFellesformatXml.msgHead.msgInfo.patient.ident.first().id shouldBeEqualTo pasientFnr
                     actualFellesformatXml.msgHead.msgInfo.receiver.organisation.ident.first().id shouldBeEqualTo orgnr
 
@@ -235,7 +230,6 @@ class DialogmeldingApiSpek : Spek({
                     actualFellesformatXml.mottaksMeta.ediLoggId shouldNotBeEqualTo null
                     actualFellesformatXml.mottaksMeta.avsenderFnrFraDigSignatur shouldBeEqualTo legeFnr
 
-                    actualFellesformatXml.msgHead.msgInfo.msgId shouldContain MSG_ID_PREFIX
                     actualFellesformatXml.msgHead.msgInfo.patient.ident.first().id shouldBeEqualTo pasientFnr
                     actualFellesformatXml.msgHead.msgInfo.receiver.organisation.ident.first().id shouldBeEqualTo orgnr
 

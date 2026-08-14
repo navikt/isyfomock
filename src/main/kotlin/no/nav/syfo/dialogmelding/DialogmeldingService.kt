@@ -23,7 +23,6 @@ private val dialogmeldingFilePaths = mapOf(
     DialogmeldingType.SVAR_FORESPORSEL_VEDLEGG to "/fellesformat/dialogmelding_dialog_svar_foresporsel_om_pasient_med_vedlegg.xml",
 )
 
-const val MSG_ID_PREFIX = "syfomock"
 inline fun <reified T> XMLEIFellesformat.get() = this.any.find { it is T } as T
 
 class DialogmeldingService(private val mqSender: MQSender) {
@@ -43,7 +42,7 @@ class DialogmeldingService(private val mqSender: MQSender) {
         val xmlDialogmelding = xmlFellesformat.get<XMLMsgHead>().document[0].refDoc.content.any[0] as XMLDialogmelding
         xmlFellesformat.get<XMLMsgHead>().document[0].refDoc.content.any[0] = xmlDialogmelding
 
-        xmlFellesformat.get<XMLMsgHead>().msgInfo.msgId = "$MSG_ID_PREFIX-${request.msgId}"
+        xmlFellesformat.get<XMLMsgHead>().msgInfo.msgId = request.msgId
         xmlFellesformat.get<XMLMsgHead>().msgInfo.genDate = LocalDateTime.now()
         xmlFellesformat.get<XMLMottakenhetBlokk>().ediLoggId = UUID.randomUUID().toString()
         xmlFellesformat.get<XMLMottakenhetBlokk>().mottattDatotid =
