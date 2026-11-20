@@ -9,11 +9,11 @@ val mockkVersion = "1.14.12"
 val jacksonDataTypeVersion = "2.23.0"
 val jacksonDatabindVersion = "3.3.0"
 val javaTimeAdapterVersion = "1.1.3"
-val jsonVersion = "20250517"
+val jsonVersion = "20260814"
 val logbackVersion = "1.6.6"
 val logstashEncoderVersion = "9.0"
 val micrometerRegistryVersion = "1.17.2"
-val mqVersion = "9.4.3.0"
+val mqVersion = "10.0.1.0"
 val spekVersion = "2.0.19"
 val syfotjenesterVersion = "1.2022.09.09-14.42-5356e2174b6c"
 val swaggerUiVersion = "5.34.1"
@@ -77,6 +77,13 @@ dependencies {
         exclude(group = "org.apache.logging.log4j")
     }
     implementation("org.apache.kafka:kafka_2.13:$kafkaVersion", excludeLog4j)
+    constraints {
+        implementation("at.yawk.lz4:lz4-java") {
+            version {
+                require("1.11.4")
+            }
+        }
+    }
 
     swaggerUI("org.webjars:swagger-ui:$swaggerUiVersion")
 
